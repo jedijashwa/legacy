@@ -1,6 +1,8 @@
 
 myApp.controller('SessionController', function ($scope, Session) {
+
   $scope.sessionTileTemplate = "/session_tile.html";
+
   $scope.sessions = [];
   $scope.getSessions = function () {
     Session.getSessions()

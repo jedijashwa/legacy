@@ -39,6 +39,21 @@ module.exports.getSessions = function (req, res){
   });
 };
 
+module.exports.getSession = function (req, res) {
+  Session.findById(req.params.id).then(function (session) {
+    if (session) {
+      res.json({session: session});
+      console.log('success');
+    } else {
+      res.json({err: "Session not found"});
+    }
+  })
+  .catch(function(err) {
+    console.log("ERR: ", err);
+    res.send(404, {err: err});
+  });
+};
+
 module.exports.updateStatus = function (req, res){
   var status = req.body.status;
   var id = parseInt(req.body.id);
@@ -55,7 +70,7 @@ module.exports.updateStatus = function (req, res){
 
 // not implemented, not tested
 module.exports.deleteSession = function (req, res){
-  Session.findById(req.id).then(function (session){
+  Session.findById(req.params.id).then(function (session){
     return session.destroy();
   }).then(function(){
     console.log('Session was deleted.');

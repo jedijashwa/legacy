@@ -130,3 +130,25 @@ myApp.factory('Auth', function ($http, $location, $window) {
     setLoggedIn: setLoggedIn
   };
 });
+
+myApp.factory('Video', function($http){
+  var getSession = function(sessionId) {
+    return $http({
+      method: 'GET',
+      url: '/sessions/' + sessionId
+    })
+    .then(function(res) {
+      return res;
+    });
+  };
+  return {
+    getSession: getSession
+  };
+});
+
+
+
+
+
+
+
