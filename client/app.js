@@ -19,6 +19,10 @@ myApp.config(function ($routeProvider) {
       templateUrl: 'createSession/createSession.html',
       controller: 'CreateSessionController'
     })
+    .when('/sessions/:sessionId', {
+      templateUrl: 'sessions/video.html',
+      controller: 'VideoController'
+    })
     .otherwise({
       redirectTo: '/'
     });
