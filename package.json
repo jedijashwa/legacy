@@ -27,7 +27,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "postinstall": "bower install"
   },
   "repository": {
