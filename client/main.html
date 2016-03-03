@@ -21,17 +21,7 @@
     </div>
   </div>
 </div>
-<div class="sessionContainer"> 
-  <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'">
-    <img class="photo" src="images/{{session.category}}.jpg">
-    <div class="sessionDetails">
-      <li class="topic content">{{session.topic}}</li>
-      <li class="description content">{{session.description}}</li>
-      <li class="category content"><span class="bold">Category: </span>{{session.category}}</li>
-      <li class="tutor content"><span class="bold">Tutor: </span>{{session.User.username}}</li>
-      <li class="time content"><span class="bold">{{displayTime(session.startTime)}}</span></li>
-    </div>
-    <li class="session-full button" ng-if="session.status===true">Session Full</li>
-    <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, email)">Register</button></li>
+<div class="sessionContainer">
+  <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'" ng-include="sessionTileTemplate">
   </ul>
 </div>

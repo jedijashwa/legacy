@@ -1,6 +1,6 @@
 
 myApp.controller('SessionController', function ($scope, Session) {
-  $
+  $scope.sessionTileTemplate = "/session_tile.html";
   $scope.sessions = [];
   $scope.getSessions = function () {
     Session.getSessions()
@@ -8,7 +8,7 @@ myApp.controller('SessionController', function ($scope, Session) {
       $scope.sessions = sessions;
     });
   };
-  
+
   $scope.getSessions();
   $scope.isClicked = false;
 
@@ -36,7 +36,7 @@ myApp.controller('SessionController', function ($scope, Session) {
         return true;
       } else if ($scope.filterType === 'day') {
         return sessionTime.getDay() === today.getDay() && sessionTime.getMonth() === today.getMonth() && sessionTime.getFullYear() === today.getFullYear();
-      } 
+      }
     } else {
       return true;
     }
@@ -51,20 +51,20 @@ myApp.controller('SessionController', function ($scope, Session) {
 .controller('CreateSessionController', function ($scope, Session, Auth, $window) {
   $scope.session = {};
   $scope.myDate = new Date();
-  
+
   var formatDate = function (date, time) {
     date = date.toString().split(' ');
     var months = {Jan:'01',Feb:'02',Mar:'03',Apr:'04',May:'05',Jun:'06',Jul:'07',Aug:'08',Sep:'09',Oct:'10',Nov:'11',Dec:'12'};
     var month = months[date[1]];
     var day = date[2];
     var year = date[3];
-    
+
     return year + '-' + month + '-' + day + ' ' + time;
   };
 
   $scope.createSession = function (session) {
     session.startTime = formatDate($scope.myDate, $scope.time);
-    
+
     // attaches UserId to session instance that gets created
     Auth.getSignedInUser().then(function (user){
       session.UserId = user.data.UserId;
@@ -74,9 +74,9 @@ myApp.controller('SessionController', function ($scope, Session) {
         $window.location.href = '/#/';
       });
     });
-    
+
   };
-  
+
   $scope.isLoggedIn = function () {
     if (Auth.getLoggedIn()){
       $scope.$emit('loggedIn');
@@ -87,4 +87,3 @@ myApp.controller('SessionController', function ($scope, Session) {
   };
   $scope.isLoggedIn();
 });
-
