@@ -40,7 +40,7 @@ module.exports.getSessions = function (req, res){
 };
 
 module.exports.getSession = function (req, res) {
-  Session.findById(req.params.id).then(function (session) {
+  Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
       res.json({session: session});
       console.log('success');

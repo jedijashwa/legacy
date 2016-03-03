@@ -8,7 +8,8 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', function
           console.log(res.err);
         } else {
           console.log('res: ', res);
-          $scope.session = res.session;
+          $scope.session = res.data.session;
+          console.log($scope.session);
         }
       });
   };
@@ -16,5 +17,5 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', function
     id: $routeParams.sessionId
   };
   $scope.initialize();
-  console.log('session: ', $scope.session);
+
 }]);
