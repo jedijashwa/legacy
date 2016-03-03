@@ -21,8 +21,6 @@
     </div>
   </div>
 </div>
-<img class="featured" src="images/featured.gif">
-
 <div class="sessionContainer"> 
   <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'">
     <img class="photo" src="images/{{session.category}}.jpg">
