@@ -5,13 +5,14 @@ myApp.controller('SigninController', function ($scope, Auth, $location) {
   $scope.failMessage = null;
   $scope.signin = function (user) {
     Auth.signin(user).then(function (user){
+      console.log(user);
         if (!user) {
           $scope.user = {};
           $scope.failMessage = "Username or password incorrect";
           return;
         } 
         $scope.failMessage = null;
-        Auth.setLoggedIn(true, user.id);
+        Auth.setLoggedIn(true, user.id, user.email);
       // redirect
         $location.path('/');
         

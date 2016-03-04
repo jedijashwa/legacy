@@ -104,7 +104,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
 
   var loggedIn = false;
   var userId = undefined;
-  
+  var userEmail = undefined;
   
 
   var getLoggedIn = function(){
@@ -115,12 +115,18 @@ myApp.factory('Auth', function ($http, $location, $window) {
     return userId;
   };
 
-  var setLoggedIn = function(bool, id){
+  var getUserEmail = function () {
+    return userEmail;
+  };
+
+  var setLoggedIn = function(bool, id, email){
     loggedIn = bool;
     if (loggedIn) {
       userId = id;
+      email = email;
     } else {
       userId = undefined;
+      userEmail = undefined;
     }
   };
 
@@ -143,7 +149,8 @@ myApp.factory('Auth', function ($http, $location, $window) {
     signout: signout,
     getLoggedIn: getLoggedIn,
     setLoggedIn: setLoggedIn,
-    getUserId: getUserId
+    getUserId: getUserId,
+    getUserEmail: getUserEmail
   };
 });
 
