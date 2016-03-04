@@ -8,29 +8,28 @@
   <title>Learn it Now!</title>
   <link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700' rel='stylesheet' type='text/css'>
-  <link href="./bower_components/angular-material/angular-material.css" rel="stylesheet" />
-  <link href='css/main.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="https://simplewebrtc.com/latest-v2.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
   <script src="https://js.braintreegateway.com/js/braintree-2.21.0.min.js"></script>
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel='stylesheet' type='text/css'>
 
 </head>
 
 <body ng-app="myApp" ng-controller="IndexController">
 
   <div class="container">
-    <header class="mainHeader">
-      <img class="clock" src="images/clock.png">
-      <h1 class="head"><a href="/#/">Learn it Now!</a></h1>
-      <a href="#/signin" class="nav" ng-show="!getLoggedIn()">Sign In</a>
-      <a href="#/siginout" class="nav" ng-show="getLoggedIn()" ng-click="signout()">Sign Out</a>
-      <a href="#/create" class="nav">Create Session</a>
+    <header class="mainHeader row">
+      <div class="six columns">
+        <h1 class="head"><a href="/#/"><img class="clock" src="images/clock.png">Learn it Now!</a></h1>
+      </div>
+      <div class="six columns">
+        <a href="#/signin" class="nav" ng-show="!getLoggedIn()"><button>Sign In</button></a>
+        <a href="#/siginout" class="nav" ng-show="getLoggedIn()" ng-click="signout()"><button>Sign Out</button></a>
+        <a href="#/create" class="nav"><button>Create Session</button></a>
+      </div>
     </header>
 
     <div ng-view></div>
@@ -47,7 +46,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
   <script src="./bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
-  <script src="./bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
 
 </body>
 </html>
