@@ -13,5 +13,5 @@
     <input type="submit" value="Pay $10">
   </form>
   <li class="session-full button" ng-if="session.status===true">Session Full</li>
-  <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, email)">Register</button></li>
+  <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, getUserEmail())">Register</button></li>
 </div>
