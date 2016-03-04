@@ -22,6 +22,6 @@
   </div>
 </div>
 <div class="sessionContainer">
-  <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'" ng-include="sessionTileTemplate">
+  <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
   </ul>
 </div>
