@@ -1,10 +1,5 @@
 
-<<<<<<< HEAD
-myApp.controller('SessionController', function ($scope, Session) {
-
-=======
 myApp.controller('SessionController', function ($scope, $http, Session) {
->>>>>>> Creates paymentTest page.
   $scope.sessionTileTemplate = "/session_tile.html";
 
   $scope.sessions = [];
