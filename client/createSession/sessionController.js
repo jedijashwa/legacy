@@ -19,6 +19,8 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
   $scope.register = function (session, tuteeEmail){
 
     var studentId = $scope.getUserId();
+    console.log(session);
+    console.log(tuteeEmail);
 
     if (!studentId) {
       return;
@@ -28,7 +30,6 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
       tuteeEmail: tuteeEmail, 
       link: session.link, 
       topic: session.topic, 
-      tutorEmail: session.User.email,
       studentId: studentId,
       sessionId: session.id
     };
