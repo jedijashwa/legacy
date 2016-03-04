@@ -20,7 +20,7 @@
       <option value="Wellness">Wellness</option>
       <option value="Cooking">Cooking</option>
     </select>
-    <br>   
+    <br>
     <label>Date </label>
     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
 
@@ -76,6 +76,9 @@
       <option value="11:30:00">11:30 AM</option>
     </select>
     <br>
+    <br>
+    <label>Session Price</label><br>
+    <input type="number" ng-model='session.price' max="20.00" required></input>
     <br>
     <button class="submit">Create Session</button>
   </form>
