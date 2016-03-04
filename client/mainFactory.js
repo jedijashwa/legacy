@@ -87,8 +87,8 @@ myApp.factory('Auth', function ($http, $location, $window) {
     });
   };
   
-  
-  /*var isLoggedIn = function() {
+  //persists login
+  var isLoggedIn = function() {
     return $http({
       method: 'GET',
       url: '/users/isLoggedIn'
@@ -100,7 +100,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
 
   isLoggedIn().then(function(bool){
     loggedIn = bool;
-  });*/
+  });
 
   var loggedIn = false;
   var userId = undefined;
