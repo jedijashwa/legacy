@@ -141,8 +141,27 @@ myApp.factory('Video', function($http){
       return res;
     });
   };
+
+  var setupConf = function (localEl, remoteEl) {
+    var webrtc = new SimpleWebRTC({
+      localVideoEl: localEl,
+      remoteVideosEl: remoteEl,
+      autoRequestMedia: true
+    });
+
+    return webrtc;
+  };
+
+  var callConf = function (webrtc, roomname) {
+    webrtc.on('readToCall', function () {
+      webrtc.joinRoom(roomname);
+    });
+  };
+
   return {
-    getSession: getSession
+    getSession: getSession,
+    setupConf: setupConf,
+    callConf: callConf
   };
 });
 
