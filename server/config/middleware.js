@@ -43,4 +43,5 @@ module.exports = function (app, express) {
 
   require('../users/userRoutes.js')(userRouter);
   require('../sessions/sessionRoutes.js')(sessionRouter);
+  require('../payments/paymentsRoutes.js')(app);
 };
