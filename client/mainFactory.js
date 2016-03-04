@@ -59,6 +59,9 @@ myApp.factory('Auth', function ($http, $location, $window) {
     })
     .then(function (user) {
       return user.data;
+    })
+    .catch(function(err){
+      console.log(err);
     });
   };
 

@@ -11,6 +11,7 @@
       <label>Password </label><br>
       <input type="password" ng-model='user.password' required><br>
       <br>
+      <p ng-show='failMessage' style="color: red;">{{failMessage}}</p>
       <button class="submit">Sign In</button>
     </form>
     <br>
