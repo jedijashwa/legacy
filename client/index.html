@@ -25,8 +25,8 @@
     <header class="mainHeader">
       <img class="clock" src="images/clock.png">
       <h1 class="head"><a href="/#/">Learn it Now!</a></h1>
-      <a href="#/signin" class="nav" ng-show="auth.signin">Sign In</a>
-      <a href="#/siginout" class="nav" ng-show="auth.signout" ng-click="signout()">Sign Out</a>
+      <a href="#/signin" class="nav" ng-show="!getLoggedIn()">Sign In</a>
+      <a href="#/siginout" class="nav" ng-show="getLoggedIn()" ng-click="signout()">Sign Out</a>
       <a href="#/create" class="nav">Create Session</a>
     </header>
 

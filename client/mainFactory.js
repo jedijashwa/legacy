@@ -88,7 +88,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
   };
   
   
-  var isLoggedIn = function() {
+  /*var isLoggedIn = function() {
     return $http({
       method: 'GET',
       url: '/users/isLoggedIn'
@@ -98,22 +98,34 @@ myApp.factory('Auth', function ($http, $location, $window) {
     });
   };
 
-  var loggedIn = false;
-  
   isLoggedIn().then(function(bool){
     loggedIn = bool;
-  });
+  });*/
+
+  var loggedIn = false;
+  var userId = undefined;
+  
+  
 
   var getLoggedIn = function(){
     return loggedIn;
   };
 
-  var setLoggedIn = function(bool){
+  var getUserId = function () {
+    return userId;
+  };
+
+  var setLoggedIn = function(bool, id){
     loggedIn = bool;
+    if (loggedIn) {
+      userId = id;
+    } else {
+      userId = undefined;
+    }
   };
 
   var getSignedInUser = function () {
-    // return $window.localStorage.getItem('user');
+
     return $http({
       method: 'GET',
       url: '/users/getSignedInUser'
@@ -123,14 +135,15 @@ myApp.factory('Auth', function ($http, $location, $window) {
     });
   };
 
+
   return {
     getSignedInUser : getSignedInUser,
     signin: signin,
     signup: signup,
     signout: signout,
-    isLoggedIn: isLoggedIn,
     getLoggedIn: getLoggedIn,
-    setLoggedIn: setLoggedIn
+    setLoggedIn: setLoggedIn,
+    getUserId: getUserId
   };
 });
 
