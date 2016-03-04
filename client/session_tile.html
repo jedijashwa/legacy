@@ -5,6 +5,7 @@
   <li class="category content"><span class="bold">Category: </span>{{session.category}}</li>
   <li class="tutor content"><span class="bold">Tutor: </span>{{session.User.username}}</li>
   <li class="time content"><span class="bold">{{displayTime(session.startTime)}}</span></li>
+  <p>This session costs: ${{session.price}}</p>
 </div>
 <div class="registration" ng-if="getLoggedIn()">
   <form id="checkout" method="post" action="/checkout">
