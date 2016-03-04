@@ -1,5 +1,7 @@
 
-myApp.controller('SessionController', function ($scope, Session) {
+myApp.controller('SessionController', function ($scope, Session, Auth) {
+
+  angular.extend($scope, Auth);
 
   $scope.sessionTileTemplate = "/session_tile.html";
 
@@ -16,8 +18,22 @@ myApp.controller('SessionController', function ($scope, Session) {
 
   $scope.register = function (session, tuteeEmail){
 
+    var studentId = $scope.getUserId();
+
+    if (!studentId) {
+      return;
+    }
     // send an email to user and register them
-    var registerInfo = {tuteeEmail: tuteeEmail, link: session.link, topic: session.topic, tutorEmail: session.User.email};
+    var registerInfo = {
+      tuteeEmail: tuteeEmail, 
+      link: session.link, 
+      topic: session.topic, 
+      tutorEmail: session.User.email,
+      studentId: studentId,
+      sessionId: session.id
+    };
+
+    console.log(registerInfo);
 
     Session.register(registerInfo);
 
