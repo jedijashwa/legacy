@@ -123,7 +123,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
     loggedIn = bool;
     if (loggedIn) {
       userId = id;
-      email = email;
+      userEmail = email;
     } else {
       userId = undefined;
       userEmail = undefined;
