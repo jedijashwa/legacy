@@ -20,7 +20,7 @@ myApp.factory('Session', function($http, $location) {
     });
   };
 
-  // must send an object with 'id' and 'status' property 
+  // must send an object with 'id' and 'status' property
   var updateStatus = function(updateInfo){
     console.log('clicked inside factory', updateInfo);
     return $http({
@@ -32,7 +32,7 @@ myApp.factory('Session', function($http, $location) {
       return updatedSession;
     });
   };
-  
+
   var register = function(userInfo) {
     return $http({
       method: 'POST',
@@ -83,8 +83,8 @@ myApp.factory('Auth', function ($http, $location, $window) {
       return user.data;
     });
   };
-  
-  
+
+
   var isLoggedIn = function() {
     return $http({
       method: 'GET',
@@ -96,7 +96,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
   };
 
   var loggedIn = false;
-  
+
   isLoggedIn().then(function(bool){
     loggedIn = bool;
   });
@@ -164,10 +164,3 @@ myApp.factory('Video', function($http){
     callConf: callConf
   };
 });
-
-
-
-
-
-
-

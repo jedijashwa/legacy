@@ -1,6 +1,10 @@
 
+<<<<<<< HEAD
 myApp.controller('SessionController', function ($scope, Session) {
 
+=======
+myApp.controller('SessionController', function ($scope, $http, Session) {
+>>>>>>> Creates paymentTest page.
   $scope.sessionTileTemplate = "/session_tile.html";
 
   $scope.sessions = [];
@@ -48,6 +52,17 @@ myApp.controller('SessionController', function ($scope, Session) {
     time = time.substring(0,16).split('T').join(' at ');
     return time += ' PST';
   };
+
+  $scope.getPaymentToken = function () {
+    $http({
+      method: 'GET',
+      url: '/client_token'
+    }).then(function (response) {
+      console.log('client_token', response.data);
+    });
+  };
+
+  $scope.getPaymentToken();
 })
 
 .controller('CreateSessionController', function ($scope, Session, Auth, $window) {
