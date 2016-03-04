@@ -224,6 +224,12 @@ input.keywordFilter {
 
 /***** session styles *****/
 
+iframe[name="braintree-dropin-frame"] {
+  padding: 10px;
+  margin: 30px;
+  width: 75%;
+}
+
 .sessionContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -238,7 +244,7 @@ input.keywordFilter {
   border-radius: 10px;
   max-width: 350px;
   width: 30%;
-  height: 530px;
+  height: 30%;
   position: relative;
   border: 1px solid #ccc;
 }
@@ -340,7 +346,7 @@ textarea {
   .session {
     width: 45%;
     max-width: 600px;
-    height: 560px;
+    /**height: 30%;**/
     margin: 20px 17px;
   }
 }
