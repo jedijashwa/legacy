@@ -153,7 +153,7 @@ myApp.factory('Video', function($http){
   };
 
   var callConf = function (webrtc, roomname) {
-    webrtc.on('readToCall', function () {
+    webrtc.on('readyToCall', function () {
       webrtc.joinRoom(roomname);
     });
   };
