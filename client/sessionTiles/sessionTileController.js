@@ -9,7 +9,6 @@ myApp.controller('sessionTileController', function ($scope, $http) {
   })
   .then(function (response) {
     var clientToken = response.data;
-    console.log(clientToken);
 
     braintree.setup(clientToken, "dropin", {
       container: "payment-form" + $scope.session.id
