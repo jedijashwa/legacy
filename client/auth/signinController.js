@@ -1,6 +1,6 @@
 
 // invokes function from mainFactory.js to sign in a user
-myApp.controller('SigninController', function ($scope, Auth, $window) {
+myApp.controller('SigninController', function ($scope, Auth, $location) {
   $scope.user = {};
   $scope.failMessage = null;
   $scope.signin = function (user) {
@@ -11,9 +11,9 @@ myApp.controller('SigninController', function ($scope, Auth, $window) {
           return;
         } 
         $scope.failMessage = null;
-        Auth.setLoggedIn(true);
+        Auth.setLoggedIn(true, user.id);
       // redirect
-        $window.location.href = '/#/';
+        $location.path('/');
         
     });
   };

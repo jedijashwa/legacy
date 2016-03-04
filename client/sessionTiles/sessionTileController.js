@@ -1,7 +1,9 @@
-myApp.controller('sessionTileController', function ($scope, $http) {
+myApp.controller('sessionTileController', function ($scope, $http, Auth) {
 // We generated a client token for you so you can test out this code
 // immediately. In a production-ready integration, you will need to
 // generate a client token on your server (see section below).
+
+  angular.extend($scope, Auth);
 
   $http({
     method: 'GET',

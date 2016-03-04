@@ -6,9 +6,11 @@
   <li class="tutor content"><span class="bold">Tutor: </span>{{session.User.username}}</li>
   <li class="time content"><span class="bold">{{displayTime(session.startTime)}}</span></li>
 </div>
-<form id="checkout" method="post" action="/checkout">
-  <div id="payment-form{{ session.id }}"></div>
-  <input type="submit" value="Pay $10">
-</form>
-<li class="session-full button" ng-if="session.status===true">Session Full</li>
-<li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, email)">Register</button></li>
+<div class="registration" ng-if="getLoggedIn()">
+  <form id="checkout" method="post" action="/checkout">
+    <div id="payment-form{{ session.id }}"></div>
+    <input type="submit" value="Pay $10">
+  </form>
+  <li class="session-full button" ng-if="session.status===true">Session Full</li>
+  <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, email)">Register</button></li>
+</div>
