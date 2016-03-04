@@ -1,2 +1,38 @@
+nav {
+  margin-top: 15px;
+  background-color: transparent; }
+  nav a {
+    color: #164d65 !important; }
+    nav a:hover {
+      color: #5f8696 !important; }
+
+.slug {
+  background-image: url("../images/background.gif");
+  background-size: cover;
+  border-top: 8px solid #a4482c;
+  border-bottom: 8px solid #a4482c; }
+
+.intro {
+  text-align: center;
+  padding-top: 30px !important;
+  padding-bottom: 20px !important;
+  font-size: 1.3em; }
+
+.clock {
+  position: relative;
+  top: -14.5px;
+  margin-right: 10px; }
+
+.filter, .filters {
+  border-radius: 5px; }
+
+.filters {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0px; }
+
+.filter {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 76px; }
 
 /*# sourceMappingURL=styles.css.map */

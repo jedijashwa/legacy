@@ -1,1 +1,52 @@
 $accent-color: #eb9842;
+$accent-dark: rgb(164,72,44);
+$primary-color: rgb(22,77,101);
+$color-lighter: rgb(95,134,150);
+
+nav {
+  margin-top: 15px;
+  background-color: rgba(0,0,0,0);
+
+  a {
+    color: $primary-color !important;
+
+    &:hover {
+        color: $color-lighter !important;
+    }
+  }
+}
+
+.slug {
+  background-image: url("../images/background.gif");
+  background-size: cover;
+  border-top: 8px solid $accent-dark;
+  border-bottom: 8px solid $accent-dark;
+}
+
+.intro {
+  text-align: center;
+  padding-top: 30px !important;
+  padding-bottom: 20px !important;
+  font-size: 1.3em;
+}
+
+.clock {
+  position: relative;
+  top: -14.5px;
+  margin-right: 10px;
+}
+
+.filter, .filters {
+  border-radius: 5px;
+}
+
+.filters {
+  background-color: rgba(0,0,0,0.3);
+  margin: 0px;
+}
+
+.filter {
+  display: block;
+  background-color: rgba(256,256,256, 0.3);
+  height: 76px;
+}
