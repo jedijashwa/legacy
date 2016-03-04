@@ -1,5 +1,5 @@
 // ///////////
-// sequelize// 
+// sequelize//
 //         //
 
 var Sequelize = require('sequelize');
@@ -12,9 +12,9 @@ var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
 var User = orm.define('User', {
-  username: { 
-    type: Sequelize.STRING, 
-    unique: true 
+  username: {
+    type: Sequelize.STRING,
+    unique: true
   },
   email: {
     type: Sequelize.STRING,
@@ -42,10 +42,11 @@ var Session = orm.define('Session', {
   startTime: Sequelize.DATE,
   link: Sequelize.TEXT,
   status: Sequelize.BOOLEAN,
-  category: Sequelize.STRING
+  category: Sequelize.STRING,
+  price: Sequelize.INTEGER
 });
 
-User.hasMany(Session); 
+User.hasMany(Session);
 User.hasMany(Session, {foreignKey: 'studentId', as: 'StudentSessions'});
 Session.belongsTo(User);
 Session.belongsTo(User, {foreignKey: 'studentId'});
@@ -59,7 +60,7 @@ exports.Session = Session;
 
 
 /////////////
-//Raw mySql// 
+//Raw mySql//
 //         //
 
 // var mysql = require('mysql');
