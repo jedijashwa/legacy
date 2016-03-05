@@ -6,10 +6,11 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
   angular.extend($scope, Auth)
 
   $scope.nonce;
-  
+
 
   $scope.initiateReg = function () {
-
+    //if the user is signedIn, this will load the Braintree paypal
+    //card options and request the client token needed to submit payments
     $http({
       method: 'GET',
       url: '/client_token'
