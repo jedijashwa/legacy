@@ -8,7 +8,7 @@ module.exports = function (app){
   
   app.post('/', sessionController.checkAuth, sessionController.addSession);
   
-  app.post('/send', sessionController.registerSession);
+  app.post('/send', sessionController.checkAuth, sessionController.registerSession);
   
   app.put('/', sessionController.updateStatus);
   

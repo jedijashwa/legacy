@@ -38,6 +38,12 @@ myApp.factory('Session', function($http, $location) {
       method: 'POST',
       url: '/sessions/send',
       data: userInfo
+    })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return error;
     });
   };
 
@@ -87,7 +93,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
     });
   };
   
-  //persists login
+
   var isLoggedIn = function() {
     return $http({
       method: 'GET',
