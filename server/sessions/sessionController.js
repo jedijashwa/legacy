@@ -17,6 +17,7 @@ module.exports.addSession = function(req, res){
     sessionInfo.UserId = req.user.id;
   // set the link property on req.body before passing it into Session.create
     req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
+    console.log(sessionInfo);
     Session.create(sessionInfo).then(function (session) {
       res.send(session);
     })
@@ -135,14 +136,14 @@ module.exports.registerSession = function(req, res) {
     session.save().then(function (){
 
       var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
-    
+
       var data = {
         from: 'robot@tutordojo.herokuapp.com',
         to: [sentInfo.tuteeEmail, session.User.dataValues.email],
         subject: 'Session Registration - ' + sentInfo.topic,
         html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + sentInfo.topic + '. This is your session link: ' + sentInfo.link + '. Thanks for signing up!'
       };
-      
+
       mailgun.messages().send(data, function (err, body) {
         if (err) {
           res.send({ error: err });
@@ -154,9 +155,7 @@ module.exports.registerSession = function(req, res) {
       }).catch(function(err){
         console.log({error: err});
       });
-      
+
 
   });
 };
-
-
