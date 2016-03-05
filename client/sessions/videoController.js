@@ -1,4 +1,4 @@
-myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$location', 'Auth', function($scope, $routeParams, Video, $location, Auth){
+myApp.controller('VideoController', ['$rootScope', '$scope', '$routeParams', 'Video', '$location', 'Auth', function($rootScope, $scope, $routeParams, Video, $location, Auth){
   angular.extend($scope, Video, Auth);
   $scope.userId = $scope.getUserId();
   $scope.authorized = false;
@@ -6,18 +6,24 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$locati
   $scope.initialize = function() {
     $scope.getSession($scope.session.id)
       .then(function(res){
-        if ($scope.userId === res.data.session.UserId || $scope.userId === res.data.session.studentId) {
-          $scope.authorized = true;
-        }
-        if (res.status === 401 || !$scope.authorized) {
+        if (res.status === 401) {
+          console.log('webrtc', $rootScope.webrtc);
+          $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
+          $scope.setLoggedIn(false);
           $location.path('/');
-        } else {
-          $scope.webrtc = $scope.setupConf('local-video', 'remote-video');
-          $scope.callConf($scope.webrtc, $scope.session.id);
-          $scope.session = res.data.session;
+          return;
         }
+        if (res.data.err === 'Session not found') {
+          $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
+          $location.path('/');
+          return;
+        }
+        $rootScope.webrtc = $scope.setupConf('local-video', 'remote-video');
+        $scope.callConf($rootScope.webrtc, $scope.session.id);
+        $scope.session = res.data.session;
       })
       .catch(function (error) {
+        $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
         $location.path('/');
       }); 
   };
