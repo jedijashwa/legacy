@@ -5,6 +5,7 @@ var passport = require('passport');
 var LocalStrategy = require('./localAuth.js');
 var User = require('../../db/models').User;
 var morgan = require('morgan');
+var session = require('express-session');
 
 module.exports = function (app, express) {
 
@@ -15,6 +16,12 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({ extend: true }));
   app.use(bodyParser.json());
   app.use(cookieParser());
+  app.use(session({
+    secret: 'chicken',
+    saveUninitialized: true,
+    resave: true,
+    name: 'test'
+  }));
   app.use(session({ secret: 'tinymonster123'}));
   app.use(passport.initialize());
   app.use(passport.session());

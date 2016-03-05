@@ -43,14 +43,22 @@ module.exports.getOneUser = function (req, res) {
 };
 
 // returns logged in user's info
-module.exports.signIn = function (req, res){
+module.exports.signIn = function (req, res) {
+  req.session.regenerate(function () {
+    req.session.user = {
+      id: req.user.id, 
+      username: req.user.username
+    };
+  });
   res.json({ id: req.user.id, username: req.user.username, email: req.user.email });
 };
 
 // destroys user logged-in session in server 
 module.exports.signOut = function (req, res){
-  req.logout();
-  res.send('Logged out.');
+  req.session.destroy(function () {
+    req.logout();
+    res.send('Logged out.');
+  });
 };
 
 module.exports.isLoggedIn = function (req, res){
