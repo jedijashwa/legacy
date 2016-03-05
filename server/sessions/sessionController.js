@@ -3,6 +3,8 @@ var User = require('../../db/models').User;
 var Mailgun = require('mailgun-js');
 var config = require('../config/config');
 var http = require('http-request');
+var payment = require('../payments/paymentsController.js');
+
 
 module.exports.addSession = function(req, res){
 
@@ -122,6 +124,34 @@ module.exports.checkAuth = function(req, res, next) {
 
 // sends an email to both user that created session and user that registers for session
 module.exports.registerSession = function(req, res) {
+  console.log('*******', req.body);
+  payment.checkout(req, res);
+  return;
+  // var requiresPayment = req.body.requiresPayment;
+  // if (requiresPayment) {
+  //   console.log(req.body);
+  //
+  //   //add the to pay functionality here
+  // }
+  //This is the content for making the payment
+  // var nonce = req.body.payment_method_nonce;
+  // var price = req.body.price;
+  // var id = req.body.id;
+  // // Use payment method nonce here
+  // gateway.transaction.sale({
+  //   amount: price,
+  //   paymentMethodNonce: nonce,
+  //   options: {
+  //     submitForSettlement: true
+  //   }
+  // }, function (err, result) {
+  //   if(err) {
+  //     console.error(err);
+  //   } else {
+  //     console.log('******',result.success);
+  //     res.send({success: result.success});
+  //   }
+  // });
 
   var sentInfo = req.body;
 
