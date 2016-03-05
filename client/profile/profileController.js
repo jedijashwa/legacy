@@ -2,6 +2,7 @@ myApp.controller('ProfileController', ['$scope', 'Auth', 'Profile', function($sc
   //need to add script to index.html
   //update routes in app.js to include profile page
   $scope.userId = Auth.getUserId();
+  $scope.userName = Auth.getUserName();
 
 
   $scope.getStudentSessions = function(){
