@@ -45,9 +45,6 @@ module.exports.getSessions = function (req, res){
 module.exports.getSession = function (req, res) {
   Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
-      if (req.user.id) {
-
-      }
       res.json({session: session});
     } else {
       res.json({err: "Session not found"});
@@ -55,6 +52,34 @@ module.exports.getSession = function (req, res) {
   })
   .catch(function(err) {
     console.log("ERR: ", err);
+    res.send(404, {err: err});
+  });
+};
+
+module.exports.getStudentSessions = function(req,res) {
+  console.log("HERE: ", req);
+  Session.findAll({ where: {studentId: req.params.userId}})
+  .then(function(sessions) {
+    if (sessions) {
+      res.json({studentSessions: sessions});
+    } else {
+      res.json({err: "User has no upcoming student sessions"});
+    }
+  })
+  .catch(function(err) {
+    res.send(404, {err: err});
+  });
+};
+module.exports.getTutorSessions = function(req,res) {
+  Session.findAll({ where: {id: req.params.userId}})
+  .then(function(sessions) {
+    if (sessions) {
+      res.json({tutorSessions: sessions});
+    } else {
+      res.json({err: "User has no upcoming tutoring sessions"});
+    }
+  })
+  .catch(function(err) {
     res.send(404, {err: err});
   });
 };
@@ -133,3 +158,5 @@ module.exports.registerSession = function(req, res) {
 
   });
 };
+
+

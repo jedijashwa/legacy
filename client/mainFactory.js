@@ -111,10 +111,15 @@ myApp.factory('Auth', function ($http, $location, $window) {
   var loggedIn = false;
   var userId = undefined;
   var userEmail = undefined;
+  var userName = undefined;
   
 
   var getLoggedIn = function(){
     return loggedIn;
+  };
+
+  var getUserName = function () {
+    return userName;
   };
 
   var getUserId = function () {
@@ -125,11 +130,12 @@ myApp.factory('Auth', function ($http, $location, $window) {
     return userEmail;
   };
 
-  var setLoggedIn = function(bool, id, email){
+  var setLoggedIn = function(bool, id, email, username){
     loggedIn = bool;
     if (loggedIn) {
       userId = id;
       userEmail = email;
+      userName = username;
     } else {
       userId = undefined;
       userEmail = undefined;
@@ -156,7 +162,8 @@ myApp.factory('Auth', function ($http, $location, $window) {
     getLoggedIn: getLoggedIn,
     setLoggedIn: setLoggedIn,
     getUserId: getUserId,
-    getUserEmail: getUserEmail
+    getUserEmail: getUserEmail,
+    getUserName: getUserName
   };
 });
 
@@ -197,7 +204,30 @@ myApp.factory('Video', function($http){
   };
 });
 
-
+myApp.factory('Profile', function($http) {
+  var getStudentSessions = function(userId) {
+    return $http({
+      method: 'GET',
+      url: '/sessions/students/' + userId
+    })
+    .then(function(res) {
+      return res.data;
+    });
+  };
+  var getTutorSessions = function(userId) {
+    return $http({
+      method: 'GET',
+      url: '/sessions/tutors/' + userId
+    })
+    .then(function(res) {
+      return res.data;
+    });
+  };
+  return {
+    getStudentSessions: getStudentSessions,
+    getTutorSessions: getTutorSessions
+  };
+});
 
 
 
