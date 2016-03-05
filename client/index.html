@@ -35,9 +35,9 @@
         <a href="#!" class="brand-logo">TutorDojo</a>
         <a href="#/" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#/create" ng-if="auth.signout">Create Session</a></li>
-          <li><a href="#/signin" ng-if="auth.signin">Sign In</a></li>
-          <li><a href="#/siginout" ng-if="auth.signout" ng-click="signout()">Sign Out</a></li>
+          <li><a href="#/create" ng-if="!getLoggedIn()">Create Session</a></li>
+          <li><a href="#/signin" ng-if="getLoggedIn()">Sign In</a></li>
+          <li><a href="#/siginout" ng-if="!getLoggedIn()" ng-click="signout()">Sign Out</a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li><a href="#/create" ng-if="!getLoggedIn()">Create Session</a></li>
@@ -47,18 +47,6 @@
       </div>
     </div>
   </nav>
-
-    <!-- <header class="mainHeader row">
-      <div class="six columns">
-        <h1 class="head"><a href="/#/"><img class="clock" src="images/clock.png">Learn it Now!</a></h1>
-      </div>
-      <div class="six columns">
-        <a href="#/signin" class="nav" ng-show="!getLoggedIn()"><button>Sign In</button></a>
-        <a href="#/siginout" class="nav" ng-show="getLoggedIn()" ng-click="signout()"><button>Sign Out</button></a>
-        <a href="#/create" class="nav"><button>Create Session</button></a>
-      </div>
-    </header> -->
-
     <div ng-view></div>
 
   <script src="app.js"></script>

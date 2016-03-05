@@ -1,6 +1,6 @@
 //determine which sign-in/sign-out buttons appear in index.html
 myApp.controller('IndexController', function($scope, $window, Auth) {
-  
+
   angular.extend($scope, Auth);
 
   $scope.auth = { signin: true, signout: false };
@@ -38,5 +38,7 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
     });
 
     $('select').material_select();
+
+    $(".button-collapse").sideNav();
   });
 });
