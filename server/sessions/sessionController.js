@@ -45,8 +45,10 @@ module.exports.getSessions = function (req, res){
 module.exports.getSession = function (req, res) {
   Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
+      if (req.user.id) {
+
+      }
       res.json({session: session});
-      console.log('success');
     } else {
       res.json({err: "Session not found"});
     }
@@ -84,7 +86,7 @@ module.exports.checkAuth = function(req, res, next) {
   if(req.user && req.user.dataValues && req.user.dataValues.id) {
     next();
   } else {
-    res.send('Please sign in to create a session.');
+    res.sendStatus(401);
   }
 };
 
