@@ -27,8 +27,9 @@ module.exports.addSession = function(req, res){
 };
 
 module.exports.getSessions = function (req, res){
-  Session.findAll({ where: req.body, include: [User]}).then(function (sessions) {
+  Session.findAll({ where: req.body, include: [{model: User, as: 'User'}]}).then(function (sessions) {
     if (sessions){
+      console.log(sessions);
       res.json(sessions);
     } else {
       console.log('No sessions found');

@@ -48,8 +48,8 @@ var Session = orm.define('Session', {
 
 User.hasMany(Session);
 User.hasMany(Session, {foreignKey: 'studentId', as: 'StudentSessions'});
-Session.belongsTo(User);
-Session.belongsTo(User, {foreignKey: 'studentId'});
+Session.belongsTo(User, {foreignKey: 'UserId', as: 'User'});
+Session.belongsTo(User, {foreignKey: 'studentId', as: 'Student'});
 
 User.sync();
 Session.sync();
