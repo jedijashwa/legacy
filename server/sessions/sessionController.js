@@ -15,7 +15,6 @@ module.exports.addSession = function(req, res){
     }
     var sessionInfo = req.body;
     sessionInfo.UserId = req.user.id;
-    console.log(req.user);
   // set the link property on req.body before passing it into Session.create
     req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
     Session.create(sessionInfo).then(function (session) {

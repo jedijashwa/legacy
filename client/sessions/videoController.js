@@ -5,15 +5,17 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$locati
   $scope.initialize = function() {
     $scope.getSession($scope.session.id)
       .then(function(res){
-        $scope.webrtc = $scope.setupConf('local-video', 'remote-video');
-        $scope.callConf($scope.webrtc, $scope.session.id);
-        $scope.session = res.data.session;
+        if (res.status === 401) {
+          $location.path('/');
+        } else {
+          $scope.webrtc = $scope.setupConf('local-video', 'remote-video');
+          $scope.callConf($scope.webrtc, $scope.session.id);
+          $scope.session = res.data.session;
         }
       })
       .catch(function (error) {
         $location.path('/');
-      })
-    
+      }); 
   };
   $scope.session = {
     id: $routeParams.sessionId

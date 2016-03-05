@@ -168,7 +168,10 @@ myApp.factory('Video', function($http){
     })
     .then(function(res) {
       return res;
-    });
+    })
+    .catch(function (error) {
+      return error;
+    })
   };
 
   var setupConf = function (localEl, remoteEl) {
