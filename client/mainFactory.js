@@ -197,7 +197,30 @@ myApp.factory('Video', function($http){
   };
 });
 
-
+myApp.factory('Profile', function($http) {
+  var getStudentSessions = function(userId) {
+    return $http({
+      method: 'GET',
+      url: '/sessions/students/' + userId
+    })
+    .then(function(res) {
+      return res.data;
+    });
+  };
+  var getTutorSessions = function(userId) {
+    return $http({
+      method: 'GET',
+      url: '/sessions/tutors/' + userId
+    })
+    .then(function(res) {
+      return res.data;
+    });
+  };
+  return {
+    getStudentSessions: getStudentSessions,
+    getTutorSessions: getTutorSessions
+  };
+});
 
 
 
