@@ -43,7 +43,8 @@ var Session = orm.define('Session', {
   link: Sequelize.TEXT,
   status: Sequelize.BOOLEAN,
   category: Sequelize.STRING,
-  price: Sequelize.INTEGER
+  price: Sequelize.INTEGER,
+  img: Sequelize.STRING
 });
 
 User.hasMany(Session);
