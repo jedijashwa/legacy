@@ -5,7 +5,6 @@ myApp.controller('SigninController', function ($scope, Auth, $location) {
   $scope.failMessage = null;
   $scope.signin = function (user) {
     Auth.signin(user).then(function (user){
-      console.log("User: ", user);
         if (!user) {
           $scope.user = {};
           $scope.failMessage = "Username or password incorrect";
