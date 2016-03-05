@@ -1,11 +1,15 @@
-myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$location', function($scope, $routeParams, Video, $location){
-  angular.extend($scope, Video);
-  
+myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$location', 'Auth', function($scope, $routeParams, Video, $location, Auth){
+  angular.extend($scope, Video, Auth);
+  $scope.userId = $scope.getUserId();
+  $scope.authorized = false;
 
   $scope.initialize = function() {
     $scope.getSession($scope.session.id)
       .then(function(res){
-        if (res.status === 401) {
+        if ($scope.userId === res.data.session.UserId || $scope.userId === res.data.session.studentId) {
+          $scope.authorized = true;
+        }
+        if (res.status === 401 || !$scope.authorized) {
           $location.path('/');
         } else {
           $scope.webrtc = $scope.setupConf('local-video', 'remote-video');
