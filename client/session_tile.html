@@ -11,14 +11,14 @@
       <p><i>with {{session.User.username}}</i></p>
       <p>{{session.description}}</p>
       <p>{{displayTime(session.startTime)}}</span></p>
-      <a ng-click="registration = session.id">Register</a>
+      <a href="" ng-click="initiateReg()">Register</a>
     </div>
   </div>
 </div>
 
 <div class="register" ng-show='registration === session.id'>
   <div class="card">
-    <div class="close" ng-click="registration = 0">
+    <div class="close" ng-click="closeReg()">
       <i class="material-icons right">close</i>
     </div>
     <form id="checkout{{ session.id }}" method="post" action="/checkout" ng-submit="registration = 0">
