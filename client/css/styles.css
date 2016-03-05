@@ -1,3 +1,14 @@
+.btn {
+  background-color: #164d65; }
+  .btn:hover {
+    background-color: #5f8696; }
+
+input:focus {
+  border-bottom: 1px solid #eb9842;
+  -webkit-box-shadow: 0 1px 0 0 #eb9842;
+  -moz-box-shadow: 0 1px 0 0 #eb9842;
+  box-shadow: 0 1px 0 0 #eb9842; }
+
 nav {
   margin-top: 15px;
   background-color: transparent; }

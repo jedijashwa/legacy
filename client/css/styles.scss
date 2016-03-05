@@ -3,6 +3,21 @@ $accent-dark: rgb(164,72,44);
 $primary-color: rgb(22,77,101);
 $color-lighter: rgb(95,134,150);
 
+.btn {
+  background-color: $primary-color;
+
+  &:hover {
+    background-color: $color-lighter;
+  }
+}
+
+input:focus {
+  border-bottom: 1px solid $accent-color;
+  -webkit-box-shadow: 0 1px 0 0 $accent-color;
+  -moz-box-shadow: 0 1px 0 0 $accent-color;
+  box-shadow: 0 1px 0 0 $accent-color;
+}
+
 nav {
   margin-top: 15px;
   background-color: rgba(0,0,0,0);
