@@ -61,4 +61,7 @@ nav {
     position: relative;
     cursor: pointer; }
 
+#createSession {
+  margin-bottom: 30px; }
+
 /*# sourceMappingURL=styles.css.map */
