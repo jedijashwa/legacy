@@ -19,8 +19,6 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
   $scope.register = function (session, tuteeEmail){
 
     var studentId = $scope.getUserId();
-    console.log(session);
-    console.log(tuteeEmail);
 
     if (!studentId) {
       return;
@@ -34,15 +32,21 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
       sessionId: session.id
     };
 
-    console.log(registerInfo);
-
-    Session.register(registerInfo);
+    Session.register(registerInfo)
+    .then(function (response) {
+      if (response.data.session) {
+        Materialize.toast('You have succesfully registered for this session!', 1750);
+        $scope.getSessions();
+      } else {
+        Materialize.toast('I\'m sorry, there was an error processing your registration', 1750);
+      }
+    });
 
     // when someone registers for a session, status of session changes to true
-    var updateInfo = {id: session.id, status: true };
+    /*var updateInfo = {id: session.id, status: true };
     Session.updateStatus(updateInfo).then(function(updatedSession){
       $scope.getSessions();
-    });
+    });*/
   };
 
   //logic for filtering sessions by all vs. today
@@ -83,16 +87,16 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
 
   $scope.createSession = function (session) {
     session.startTime = formatDate($scope.myDate, $scope.time);
-    console.log(session);
-    // attaches UserId to session instance that gets created
-    Auth.getSignedInUser().then(function (user){
-      session.UserId = user.data.UserId;
 
-      Session.createSession(session).then(function(){
-        // redirect
-        $window.location.href = '/#/';
-      });
+    // attaches UserId to session instance that gets created
+    // Auth.getSignedInUser().then(function (user){
+    //   session.UserId = user.data.UserId;
+
+    Session.createSession(session).then(function(){
+      // redirect
+      $window.location.href = '/#/';
     });
+    // });
 
   };
 

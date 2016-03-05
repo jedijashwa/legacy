@@ -3,7 +3,7 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
 // immediately. In a production-ready integration, you will need to
 // generate a client token on your server (see section below).
 
-  angular.extend($scope, Auth);
+  angular.extend($scope, Auth)
 
   $http({
     method: 'GET',
@@ -11,7 +11,6 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
   })
   .then(function (response) {
     var clientToken = response.data;
-
     braintree.setup(clientToken, "dropin", {
       container: "payment-form" + $scope.session.id
     });

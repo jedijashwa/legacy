@@ -13,9 +13,12 @@ module.exports.addSession = function(req, res){
       console.error (err);
       return;
     }
+    var sessionInfo = req.body;
+    sessionInfo.UserId = req.user.id;
+    console.log(req.user);
   // set the link property on req.body before passing it into Session.create
     req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
-    Session.create(req.body).then(function (session) {
+    Session.create(sessionInfo).then(function (session) {
       res.send(session);
     })
     .catch(function (err) {
@@ -78,7 +81,7 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
-  if(req.user && req.user.id) {
+  if(req.user && req.user.dataValues && req.user.dataValues.id) {
     next();
   } else {
     res.send('Please sign in to create a session.');
@@ -87,20 +90,44 @@ module.exports.checkAuth = function(req, res, next) {
 
 // sends an email to both user that created session and user that registers for session
 module.exports.registerSession = function(req, res) {
-  var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
-  
-  var data = {
-    from: 'learnitnow@learnitnow.herokuapp.com',
-    to: [req.body.tuteeEmail, req.body.tutorEmail],
-    subject: 'Session Registration - ' + req.body.topic,
-    html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + req.body.topic + '. This is your session link: ' + req.body.link + '. Thanks for signing up!'
-  };
-  
-  mailgun.messages().send(data, function (err, body) {
-    if (err) {
-      res.send('Error', { error: err });
-    } else {
-      res.send('Email sent.');
+
+  var sentInfo = req.body;
+
+  if (req.user.id !== sentInfo.studentId) {
+    res.send('Error', {error: 'Error processing your request'});
+    return;
+  }
+
+  Session.findById(sentInfo.sessionId, {include: [User]}).then(function (session){
+    if (session.status) {
+      res.send({error: 'full'});
+      return;
     }
+    session.status = true;
+    session.studentId = sentInfo.studentId;
+    session.save().then(function (){
+
+      var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
+    
+      var data = {
+        from: 'robot@tutordojo.herokuapp.com',
+        to: [sentInfo.tuteeEmail, session.User.dataValues.email],
+        subject: 'Session Registration - ' + sentInfo.topic,
+        html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + sentInfo.topic + '. This is your session link: ' + sentInfo.link + '. Thanks for signing up!'
+      };
+      
+      mailgun.messages().send(data, function (err, body) {
+        if (err) {
+          res.send({ error: err });
+          console.log('baderror',err);
+        } else {
+          res.send({session: session});
+        }
+      });
+      }).catch(function(err){
+        console.log({error: err});
+      });
+      
+
   });
 };
