@@ -12,10 +12,12 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
     'Wellness',
     'Cooking'
   ];
+  $scope.userId = undefined;
 
   $scope.$on('loggedIn', function(){
     $scope.auth.signin = false;
     $scope.auth.signout = true;
+    $scope.userId = Auth.getUserId();
   });
 
   $scope.signout = function(){
