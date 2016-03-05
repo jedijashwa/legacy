@@ -29,7 +29,6 @@ module.exports.addSession = function(req, res){
 module.exports.getSessions = function (req, res){
   Session.findAll({ where: req.body, include: [{model: User, as: 'User'}]}).then(function (sessions) {
     if (sessions){
-      console.log(sessions);
       res.json(sessions);
     } else {
       console.log('No sessions found');
@@ -45,6 +44,12 @@ module.exports.getSessions = function (req, res){
 module.exports.getSession = function (req, res) {
   Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
+      var userId = req.session.passport.user;
+      console.log(session);
+      if (session.UserId !== userId && session.studentId !== userId) {
+        res.sendStatus(401);
+        return;
+      } 
       res.json({session: session});
     } else {
       res.json({err: "Session not found"});
@@ -108,7 +113,7 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
-  if(req.user && req.user.dataValues && req.user.dataValues.id) {
+  if(req.session.passport && req.session.passport.user) {
     next();
   } else {
     res.sendStatus(401);
