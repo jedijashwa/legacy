@@ -5,12 +5,13 @@
   <li class="category content"><span class="bold">Category: </span>{{session.category}}</li>
   <li class="tutor content"><span class="bold">Tutor: </span>{{session.User.username}}</li>
   <li class="time content"><span class="bold">{{displayTime(session.startTime)}}</span></li>
-  <p>This session costs: ${{session.price}}</p>
+  <h2>This session costs: ${{session.price}}</h2>
 </div>
 <div class="registration" ng-if="getLoggedIn()">
   <form id="checkout" method="post" action="/checkout">
+    <input type="hidden" value={{session.price}} name="amount">
     <div id="payment-form{{ session.id }}"></div>
-    <input type="submit" value="Pay $10">
+    <input type="submit" value="Pay for this session.">
   </form>
   <li class="session-full button" ng-if="session.status===true">Session Full</li>
   <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, getUserEmail())">Register</button></li>

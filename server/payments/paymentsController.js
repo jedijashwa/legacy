@@ -15,8 +15,8 @@ module.exports.getClientToken = function (req, res) {
 
 module.exports.checkout = function (req, res) {
   var nonce = req.body.payment_method_nonce;
-  var price = req.body.price;
-  console.log(price);
+  var price = req.body.amount;
+  console.log('*******', price);
   // Use payment method nonce here
   gateway.transaction.sale({
     amount: price,
