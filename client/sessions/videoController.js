@@ -6,8 +6,6 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$locati
   $scope.initialize = function() {
     $scope.getSession($scope.session.id)
       .then(function(res){
-        console.log("User: ", $scope.userId);
-        console.log("Session: ", res.data.session);
         if ($scope.userId === res.data.session.UserId || $scope.userId === res.data.session.studentId) {
           $scope.authorized = true;
         }
@@ -20,7 +18,6 @@ myApp.controller('VideoController', ['$scope', '$routeParams', 'Video', '$locati
         }
       })
       .catch(function (error) {
-        console.log("In here?");
         $location.path('/');
       }); 
   };
