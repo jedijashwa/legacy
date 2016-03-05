@@ -21,9 +21,10 @@
     <div class="close" ng-click="closeReg()">
       <i class="material-icons right">close</i>
     </div>
-    <form id="checkout{{ session.id }}" method="post" action="/checkout" ng-submit="registration = 0">
+    <form id="checkout{{ session.id }}">
       <div id="payment-form{{ session.id }}"></div>
-      <button class="waves-effect waves-light btn right">Pay ${{ session.price }}</button>
+      <input type="hidden" name="payment_method_nonce" ng-model="nonce">
+      <button type="submit" class="waves-effect waves-light btn right">Pay ${{ session.price }}</button>
     </form>
   </div>
 </div>

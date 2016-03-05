@@ -5,6 +5,7 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
 
   angular.extend($scope, Auth)
 
+  $scope.nonce;
   
 
   $scope.initiateReg = function () {
@@ -16,11 +17,17 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
     .then(function (response) {
       var clientToken = response.data;
       braintree.setup(clientToken, "dropin", {
-        container: "payment-form" + $scope.session.id
+        container: "payment-form" + $scope.session.id,
+        onPaymentMethodReceived: function (payload) {
+          $http({
+            method: 'POST',
+            url: '/sessions/send',
+            data: {price: $scope.session.price, id: $scope.session.id, payment_method_nonce: payload.nonce}
+          })
+        }
       });
       $scope.registration = $scope.session.id;
     });
-
   };
 
   $scope.closeReg = function () {
