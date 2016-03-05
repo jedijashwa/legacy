@@ -1,18 +1,29 @@
-<img class="photo" src="images/{{session.category}}.jpg">
-<div class="sessionDetails">
-  <li class="topic content">{{session.topic}}</li>
-  <li class="description content">{{session.description}}</li>
-  <li class="category content"><span class="bold">Category: </span>{{session.category}}</li>
-  <li class="tutor content"><span class="bold">Tutor: </span>{{session.User.username}}</li>
-  <li class="time content"><span class="bold">{{displayTime(session.startTime)}}</span></li>
-  <h2>This session costs: ${{session.price}}</h2>
+<div class="col s12 m6 l4">
+  <div class="card sessionTile">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/{{session.category}}.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{session.topic}}<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">{{session.topic}}<i class="material-icons right">close</i></span>
+      <p><i>with {{session.User.username}}</i></p>
+      <p>{{session.description}}</p>
+      <p>{{displayTime(session.startTime)}}</span></p>
+      <a ng-click="registration = session.id">Register</a>
+    </div>
+  </div>
 </div>
-<div class="registration" ng-if="getLoggedIn()">
-  <form id="checkout" method="post" action="/checkout">
-    <input type="hidden" value={{session.price}} name="amount">
-    <div id="payment-form{{ session.id }}"></div>
-    <input type="submit" value="Pay for this session.">
-  </form>
-  <li class="session-full button" ng-if="session.status===true">Session Full</li>
-  <li class="registration" ng-if="session.status===false  || session.status===null"><input ng-model="email" type="text" placeholder="enter email"/><button class="button" ng-click="register(session, getUserEmail())">Register</button></li>
+
+<div class="register" ng-show='registration === session.id'>
+  <div class="card">
+    <div class="close" ng-click="registration = 0">
+      <i class="material-icons right">close</i>
+    </div>
+    <form id="checkout{{ session.id }}" method="post" action="/checkout" ng-submit="registration = 0">
+      <div id="payment-form{{ session.id }}"></div>
+      <button class="waves-effect waves-light btn right">Pay $10</button>
+    </form>
+  </div>
 </div>
