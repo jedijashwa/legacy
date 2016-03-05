@@ -23,6 +23,10 @@ myApp.config(function ($routeProvider) {
       templateUrl: 'sessions/video.html',
       controller: 'VideoController'
     })
+    .when('/profile/:userId', {
+      templateUrl: 'profile/profile.html',
+      controller: 'ProfileController'
+    })
     .otherwise({
       redirectTo: '/'
     });
