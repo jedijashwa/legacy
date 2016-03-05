@@ -1,27 +1,69 @@
 
-<div class="imageContainer">
-  <p class="intro" id="introBig">Share your knowledge or learn something new. It’s fun and easy to connect in<br>30-minute, one-on-one tutoring sessions. If you have a skill to share, sign up and create a session.<br>If you want to learn, find a topic that interests you, enter your email, and click register.</p>
-  <div class="filtersContainer">
-    <div class="select">
-      <span class="arrow"></span>
-      <select class="categories" ng-model="filterOptions">
-        <option value="" selected>Choose Category</option>
-        <option value="">Show All</option>
-        <option value="Programming">Programming</option>
-        <option value="Language">Language</option>
-        <option value="Design">Design</option>
-        <option value="Music">Music</option>
-        <option value="Wellness">Wellness</option>
-        <option value="Cooking">Cooking</option>
-      </select>
+<div>
+  <div class="row slug hide-on-small-only">
+    <div class="intro col s12 m10 offset-m1 l6 offset-l3 white-text">
+        Share your knowledge or learn something new.
+        It’s fun and easy to connect in 30-minute, one-on-one tutoring sessions.
+        If you have a skill to share, sign up and create a session.
+        If you want to learn, find a topic that interests you, enter your email,
+        and click register.
     </div>
-    <input type="search" class="filterBox keywordFilter" ng-model="filterBox" placeholder="Type keyword to filter sessions..."></input>
-    <div class="filterBox dateFilter">
-      <p>Filter by day: &nbsp;<a href="" ng-click="filterType = 'all'">All</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" ng-click="filterType = 'day'">Today</a></p>
+    <div class="row">
+      <div class="col s12 m10 offset-m1 l6 offset-l3 white-text">
+        Filters
+      </div>
+      <div class="col s12 m10 offset-m1 l6 offset-l3">
+        <div class="card filters">
+          <div class="row">
+            <div class="col s12">
+              <div class="card filter">
+                <input type="search" class="filterBox keywordFilter" ng-model="filterBox" placeholder="Keywords..."></input>
+              </div>
+            </div>
+            <div class="col s12 m6">
+              <div class="card filter">
+                <div class="input-field col s12">
+                  <select class="icons" ng-model="filterOptions">
+                    <option value="" selected>Show All</option>
+                    <option value="Programming" data-icon="images/Programming.jpg" class="circle">Programming</option>
+                    <option value="Language" data-icon="images/Language.jpg" class="circle">Language</option>
+                    <option value="Design" data-icon="images/Design.jpg" class="circle">Design</option>
+                    <option value="Music" data-icon="images/Music.jpg" class="circle">Music</option>
+                    <option value="Wellness" data-icon="images/Wellness.jpg" class="circle">Wellness</option>
+                    <option value="Cooking" data-icon="images/Cooking.jpg" class="circle">Cooking</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6">
+              <div class="card filter">
+                Day: &nbsp;<a href="" ng-click="filterType = 'all'">All</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" ng-click="filterType = 'day'">Today</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="sessionContainer">
-  <ul class="session" ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
-  </ul>
+<div class="container">
+  <div class="row">
+    <div ng-class="session-{{session.category}}" ng-repeat="session in sessions | filter:filterBox | filter:sessionFilter | filter:filterOptions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
+    </div>
+  </div>
 </div>
+
+<script>
+  $(function () {
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    });
+  });
+</script>

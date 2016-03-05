@@ -1,0 +1,90 @@
+$accent-color: #eb9842;
+$accent-dark: rgb(164,72,44);
+$primary-color: rgb(22,77,101);
+$color-lighter: rgb(95,134,150);
+
+nav {
+  margin-top: 15px;
+  background-color: rgba(0,0,0,0);
+
+  a {
+    color: $primary-color !important;
+
+    &:hover {
+        color: $color-lighter !important;
+    }
+  }
+}
+
+.slug {
+  background-image: url("../images/background.gif");
+  background-size: cover;
+  border-top: 8px solid $accent-dark;
+  border-bottom: 8px solid $accent-dark;
+}
+
+.intro {
+  text-align: center;
+  padding-top: 30px !important;
+  padding-bottom: 20px !important;
+  font-size: 1.3em;
+}
+
+.clock {
+  position: relative;
+  top: -14.5px;
+  margin-right: 10px;
+}
+
+.filter, .filters {
+  border-radius: 5px;
+}
+
+.filters {
+  background-color: rgba(0,0,0,0.3);
+  margin: 0px;
+}
+
+.filter {
+  display: block;
+  background-color: rgba(256,256,256, 0.3);
+  height: 76px;
+}
+
+.sessionTile {
+  border-radius: 5px;
+
+  .card-title {
+    font-weight: normal;
+  }
+
+  .card-image {
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .card-reveal {
+    border-radius: 5px;
+  }
+}
+
+.register {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0,0,0,0.5);
+
+  .card {
+    padding: 20px;
+  }
+
+  .close {
+    position: relative;
+    cursor: pointer;
+  }
+}
