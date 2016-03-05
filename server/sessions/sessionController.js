@@ -17,7 +17,6 @@ module.exports.addSession = function(req, res){
     sessionInfo.UserId = req.user.id;
   // set the link property on req.body before passing it into Session.create
     req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
-    console.log(sessionInfo);
     Session.create(sessionInfo).then(function (session) {
       res.send(session);
     })
@@ -63,7 +62,6 @@ module.exports.getSession = function (req, res) {
 };
 
 module.exports.getStudentSessions = function(req,res) {
-  console.log("HERE: ", req);
   Session.findAll({ where: {studentId: req.params.userId}})
   .then(function(sessions) {
     if (sessions) {
