@@ -1,3 +1,15 @@
 <h1>{{userName}}</h1>
-<p>{{studentSessions}}</p>
-<p>{{tutorSessions}}</p>
+<div>Your Upcoming Student Sessions</div>
+<div class="container">
+  <div class="row">
+    <div ng-class="session-{{session.category}}" ng-repeat="session in studentSessions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
+    </div>
+  </div>
+</div>
+<div>Your Upcoming Tutoring Sessions</div>
+<div class="container">
+  <div class="row">
+    <div ng-class="session-{{session.category}}" ng-repeat="session in tutorSessions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
+    </div>
+  </div>
+</div>
