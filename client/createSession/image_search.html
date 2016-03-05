@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="close" ng-click="$parent.imageSearch = false">
+        <i class="material-icons right">close</i>
+      </div>
+      <div class="row carousel">
+        <div class="carousel-item" ng-repeat="result in searchResults" data-img="{{ result }}"><img ng-src="{{ result }}" onload="$('.carousel').carousel();"></div>
+      </div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="phrase" type="text" class="validate" ng-model="searchPhrase">
+              <label for="phrase">Search</label>
+            </div>
+          </div>
+          <a class="waves-effect waves-light btn left" ng-click="getImages(searchPhrase);"><i class="material-icons right">search</i>Search</a>
+          <a class="waves-effect waves-light btn right" ng-click="$parent.selectImage()">Select</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

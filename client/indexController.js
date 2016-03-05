@@ -41,6 +41,6 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
 
     $('select').material_select();
 
-    $(".button-collapse").sideNav();
   });
+
 });

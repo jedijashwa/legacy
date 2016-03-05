@@ -25,9 +25,9 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
     }
     // send an email to user and register them
     var registerInfo = {
-      tuteeEmail: tuteeEmail, 
-      link: session.link, 
-      topic: session.topic, 
+      tuteeEmail: tuteeEmail,
+      link: session.link,
+      topic: session.topic,
       studentId: studentId,
       sessionId: session.id
     };
@@ -71,9 +71,11 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
   };
 })
 
-.controller('CreateSessionController', function ($scope, Session, Auth, $window) {
+.controller('CreateSessionController', function ($scope, Session, Auth, $window, $http) {
   $scope.session = {};
   $scope.myDate = new Date();
+  $scope.imageSearch = false;
+  $scope.imageSearchTemplate = '/createSession/image_search.html';
 
   var formatDate = function (date, time) {
     date = date.toString().split(' ');
@@ -83,6 +85,27 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
     var year = date[3];
 
     return year + '-' + month + '-' + day + ' ' + time;
+  };
+
+  $scope.getImages = function (phrase) {
+    $scope.searchResults = [];
+    $http.post('/images', {phrase: phrase})
+    .then(function (response) {
+      $scope.searchResults = response.data;
+    },
+    function (error) {
+      console.log(error);
+    });
+  };
+
+  $scope.selectImage = function () {
+    var carousel = $('.carousel-item');
+    for (var i = 0; i < carousel.length; i++) {
+      if (carousel[i].style.opacity === '1') {
+        $scope.session.img = $(carousel[i]).data('img');
+      }
+    }
+    $scope.imageSearch = false;
   };
 
   $scope.createSession = function (session) {
@@ -109,4 +132,6 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
     }
   };
   $scope.isLoggedIn();
+
+
 });
