@@ -31,7 +31,7 @@ module.exports.getSessions = function (req, res){
     if (sessions){
       res.json(sessions);
     } else {
-      console.log('No sessions found');
+      ('No sessions found');
       res.end();
     }
   })
@@ -75,7 +75,7 @@ module.exports.getStudentSessions = function(req,res) {
   });
 };
 module.exports.getTutorSessions = function(req,res) {
-  Session.findAll({ where: {id: req.params.userId}})
+  Session.findAll({ where: {userId: req.params.userId}})
   .then(function(sessions) {
     if (sessions) {
       res.json({tutorSessions: sessions});
