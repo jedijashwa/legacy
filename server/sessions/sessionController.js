@@ -75,7 +75,7 @@ module.exports.getStudentSessions = function(req,res) {
   });
 };
 module.exports.getTutorSessions = function(req,res) {
-  Session.findAll({ where: {userId: req.params.userId}})
+  Session.findAll({ where: {userId: req.session.passport.user}})
   .then(function(sessions) {
     if (sessions) {
       res.json({tutorSessions: sessions});
@@ -112,6 +112,7 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
+  console.log("HERE: ", req.session);
   if(req.session.passport && req.session.passport.user) {
     next();
   } else {
