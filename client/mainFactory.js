@@ -1,6 +1,7 @@
 
 myApp.factory('Session', function($http, $location) {
   var createSession = function(session) {
+    console.log(session);
     return $http({
       method: 'POST',
       url: '/sessions',
@@ -20,7 +21,7 @@ myApp.factory('Session', function($http, $location) {
     });
   };
 
-  // must send an object with 'id' and 'status' property 
+  // must send an object with 'id' and 'status' property
   var updateStatus = function(updateInfo){
     console.log('clicked inside factory', updateInfo);
     return $http({
@@ -32,7 +33,7 @@ myApp.factory('Session', function($http, $location) {
       return updatedSession;
     });
   };
-  
+
   var register = function(userInfo) {
     return $http({
       method: 'POST',
@@ -92,7 +93,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
       return user.data;
     });
   };
-  
+
 
   var isLoggedIn = function() {
     return $http({
@@ -112,7 +113,7 @@ myApp.factory('Auth', function ($http, $location, $window) {
   var userId = undefined;
   var userEmail = undefined;
   var userName = undefined;
-  
+
 
   var getLoggedIn = function(){
     return loggedIn;
@@ -228,8 +229,3 @@ myApp.factory('Profile', function($http) {
     getTutorSessions: getTutorSessions
   };
 });
-
-
-
-
-
