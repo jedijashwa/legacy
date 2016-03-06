@@ -1,3 +1,38 @@
-<h1>{{userName}}</h1>
-<p>{{studentSessions}}</p>
-<p>{{tutorSessions}}</p>
+<div class="username-header">
+  <div class="container">
+    <h1 class="white-text">{{userName}}Username</h1>
+  </div>
+</div>
+<div id="student-sessions" ng-if="studentSessions.length > 0">
+  <div class="sessions-header">
+    <div class="container">
+      <h5 class="white-text">Your Upcoming Student Sessions</h5>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div ng-class="session-{{session.category}}" ng-repeat="session in studentSessions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tutor-sessions" ng-if="tutorSessions.length > 0">
+  <div class="sessions-header">
+    <div class="container">
+      <h5 class="white-text">Your Upcoming Tutoring Sessions</h5>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div ng-class="session-{{session.category}}" ng-repeat="session in tutorSessions | orderBy:'startTime'" ng-include="sessionTileTemplate" ng-controller="sessionTileController">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="no-sessions" ng-if="studentSessions.length === 0 && tutorSessions.length === 0">
+  <div class="sessions-header">
+    <div class="container">
+      <h3 class="white-text">You have no upcoming sessions</h3>
+    </div>
+  </div>
+</div>

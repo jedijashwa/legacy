@@ -17,7 +17,6 @@ module.exports.addSession = function(req, res){
     sessionInfo.UserId = req.user.id;
   // set the link property on req.body before passing it into Session.create
     req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
-    console.log(sessionInfo);
     Session.create(sessionInfo).then(function (session) {
       res.send(session);
     })
@@ -32,7 +31,7 @@ module.exports.getSessions = function (req, res){
     if (sessions){
       res.json(sessions);
     } else {
-      console.log('No sessions found');
+      ('No sessions found');
       res.end();
     }
   })
@@ -63,7 +62,6 @@ module.exports.getSession = function (req, res) {
 };
 
 module.exports.getStudentSessions = function(req,res) {
-  console.log("HERE: ", req);
   Session.findAll({ where: {studentId: req.params.userId}})
   .then(function(sessions) {
     if (sessions) {
@@ -77,7 +75,7 @@ module.exports.getStudentSessions = function(req,res) {
   });
 };
 module.exports.getTutorSessions = function(req,res) {
-  Session.findAll({ where: {id: req.params.userId}})
+  Session.findAll({ where: {userId: req.session.passport.user}})
   .then(function(sessions) {
     if (sessions) {
       res.json({tutorSessions: sessions});
@@ -114,6 +112,7 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
+  console.log("HERE: ", req.session);
   if(req.session.passport && req.session.passport.user) {
     next();
   } else {

@@ -162,4 +162,12 @@ video {
   padding: 4px;
   font-size: 2.5em; }
 
+.sessions-header {
+  background-color: #164d65;
+  padding: 5px 0; }
+
+.username-header {
+  background-color: #a4482c;
+  padding: 5px 0; }
+
 /*# sourceMappingURL=styles.css.map */
