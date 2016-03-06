@@ -26,11 +26,22 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
             data: {price: $scope.session.price, id: $scope.session.id, payment_method_nonce: payload.nonce, free: $scope.session.free, studentId: $scope.getUserId()}
           })
           .then(function (res) {
-            console.log('****', res);
+            console.log(res);
+            if (res.data.session) {
+              Materialize.toast('You have succesfully registered for this class!', 1750);
+              $scope.session.studentId = $scope.getUserId();
+              $scope.session.status = true;
+
+            } else {
+              Materialize.toast('I\'m sorry, something went wrong.', 1750);
+            }
           })
           .catch(function (error) {
-            console.log('****', error);
+            Materialize.toast('I\'m sorry, something went wrong.', 1750);
           })
+          .finally(function () {
+            $scope.closeReg();
+          });
         }
       });
       $scope.registration = $scope.session.id;
@@ -41,5 +52,7 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
     $scope.registration = 0;
     $('#payment-form' + $scope.session.id).empty();
   };
+
+  console.log('fuck',$scope.session);
 
 });

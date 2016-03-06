@@ -6,14 +6,15 @@
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{session.topic}}<i class="material-icons right">more_vert</i></span>
+      <p ng-if="session.studentId">This class is full</p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">{{session.topic}}<i class="material-icons right">close</i></span>
       <p><i>with {{session.User.username}}</i></p>
       <p>{{session.description}}</p>
       <p>{{displayTime(session.startTime)}}</span></p>
-      <p ng-hide='getLoggedIn()'>Sign up to register now!!!</p>
-      <a href="" ng-show="getLoggedIn()" ng-click="initiateReg()">Register</a>
+      <a href="#/signin" ng-hide='getLoggedIn() || session.studentId'>Sign in to register</a>
+      <a href="" ng-show="getLoggedIn() && !session.studentId" ng-click="initiateReg()">Register</a>
     </div>
   </div>
 </div>
