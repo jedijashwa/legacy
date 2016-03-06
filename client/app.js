@@ -23,7 +23,7 @@ myApp.config(function ($routeProvider) {
       templateUrl: 'sessions/video.html',
       controller: 'VideoController'
     })
-    .when('/profile/:userId', {
+    .when('/profile/', {
       templateUrl: 'profile/profile.html',
       controller: 'ProfileController'
     })
