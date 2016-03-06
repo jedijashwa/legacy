@@ -12,7 +12,8 @@
       <p><i>with {{session.User.username}}</i></p>
       <p>{{session.description}}</p>
       <p>{{displayTime(session.startTime)}}</span></p>
-      <a href="" ng-click="initiateReg()">Register</a>
+      <p ng-hide='getLoggedIn()'>Sign up to register now!!!</p>
+      <a href="" ng-show="getLoggedIn()" ng-click="initiateReg()">Register</a>
     </div>
   </div>
 </div>
