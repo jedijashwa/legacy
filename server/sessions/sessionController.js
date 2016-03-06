@@ -3,6 +3,8 @@ var User = require('../../db/models').User;
 var Mailgun = require('mailgun-js');
 var config = require('../config/config');
 var http = require('http-request');
+var payment = require('../payments/paymentsController.js');
+
 
 module.exports.addSession = function(req, res){
 
@@ -48,7 +50,7 @@ module.exports.getSession = function (req, res) {
       if (session.UserId !== userId && session.studentId !== userId) {
         res.sendStatus(401);
         return;
-      } 
+      }
       session.me_id = req.session.passport.user;
       res.json({session: session});
     } else {
@@ -122,44 +124,64 @@ module.exports.checkAuth = function(req, res, next) {
 
 // sends an email to both user that created session and user that registers for session
 module.exports.registerSession = function(req, res) {
-
-  var sentInfo = req.body;
-
-  if (req.user.id !== sentInfo.studentId) {
-    res.send('Error', {error: 'Error processing your request'});
-    return;
-  }
-
-  Session.findById(sentInfo.sessionId, {include: [User]}).then(function (session){
-    if (session.status) {
-      res.send({error: 'full'});
+  var registration = function (req, res) {
+    var sentInfo = req.body;
+    console.log('&&&&&&',sentInfo);
+    if (req.session.passport.user !== sentInfo.studentId) {
+      res.send('Error', {error: 'Error processing your request'});
       return;
     }
-    session.status = true;
-    session.studentId = sentInfo.studentId;
-    session.save().then(function (){
 
-      var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
+    Session.findById(sentInfo.id, {include: [User]}).then(function (session){
+      if (!session) {
+        res.send({error: 'session does not exist'})
+      }
+      if (session.status) {
+        res.send({error: 'full'});
+        return;
+      }
+      session.status = true;
+      session.studentId = sentInfo.studentId;
+      session.save().then(function (){
 
-      var data = {
-        from: 'robot@tutordojo.herokuapp.com',
-        to: [sentInfo.tuteeEmail, session.User.dataValues.email],
-        subject: 'Session Registration - ' + sentInfo.topic,
-        html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + sentInfo.topic + '. This is your session link: ' + sentInfo.link + '. Thanks for signing up!'
-      };
+        var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
 
-      mailgun.messages().send(data, function (err, body) {
-        if (err) {
-          res.send({ error: err });
-          console.log('baderror',err);
-        } else {
-          res.send({session: session});
-        }
+        var data = {
+          from: 'robot@tutordojo.herokuapp.com',
+          to: [sentInfo.tuteeEmail, session.User.dataValues.email],
+          subject: 'Session Registration - ' + sentInfo.topic,
+          html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + sentInfo.topic + '. This is your session link: ' + sentInfo.link + '. Thanks for signing up!'
+        };
+
+        mailgun.messages().send(data, function (err, body) {
+          if (err) {
+            res.send({ error: err });
+            console.log('baderror',err);
+          } else {
+            res.send({session: session});
+          }
+        });
+        }).catch(function(err){
+          console.log({error: err});
+        });
+
+
       });
-      }).catch(function(err){
-        console.log({error: err});
-      });
+    };
+
+  var requiresPayment = !req.body.free;
+  if (requiresPayment) {
+    payment.checkout(req, res, function (success) {
+      console.log('(((((((((())))))))))', success);
+      if (success) {
+        registration(req, res);
+      } else {
+        res.sendStatus(401);
+      }
+    });
+  } else {
+    registration(req, res);
+  }
 
 
-  });
 };

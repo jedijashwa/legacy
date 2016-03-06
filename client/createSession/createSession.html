@@ -88,8 +88,20 @@
       </select>
       <br>
       <br>
-      <label>Session Price</label><br>
-      <input type="number" ng-model='session.price' max="20.00" required></input>
+      <h3>Is the Class Free?</h3>
+      <div class="row">
+        <div class="col s2">
+          <a class="waves-effect waves-light btn" ng-click="session.free = true">Yes</a>
+        </div>
+        <div class="col s2">
+          <a class="waves-effect waves-light btn" ng-click="session.free = false">No</a>
+        </div>
+      </div>
+      <div ng-show="session.free === false">
+        <h5>Pick a price (must be lower than $20)</h5>
+        <label>Session Price</label><br>
+        <input type="number" ng-model='session.price' max="20.00"></input>
+      </div>
       <br>
       <button class="btn submit">Create Session</button>
     </form>

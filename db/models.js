@@ -44,6 +44,7 @@ var Session = orm.define('Session', {
   status: Sequelize.BOOLEAN,
   category: Sequelize.STRING,
   price: Sequelize.INTEGER,
+  free: Sequelize.BOOLEAN,
   img: Sequelize.STRING
 });
 

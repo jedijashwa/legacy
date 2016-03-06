@@ -132,6 +132,6 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
     }
   };
   $scope.isLoggedIn();
-
-
+  //sets the initial class value to free
+  $scope.session.free = true;
 });

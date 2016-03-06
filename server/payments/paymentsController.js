@@ -13,10 +13,10 @@ module.exports.getClientToken = function (req, res) {
   });
 };
 
-module.exports.checkout = function (req, res) {
+module.exports.checkout = function (req, res, callback) {
   var nonce = req.body.payment_method_nonce;
-  var price = req.body.amount;
-  console.log('*******', price);
+  var price = req.body.price;
+  var id = req.body.id;
   // Use payment method nonce here
   gateway.transaction.sale({
     amount: price,
@@ -25,10 +25,11 @@ module.exports.checkout = function (req, res) {
       submitForSettlement: true
     }
   }, function (err, result) {
+    console.log('******', result);
     if(err) {
       console.error(err);
     } else {
-      res.send({success: result.success});
+      callback(result.success);
     }
   });
 };
