@@ -17,6 +17,9 @@ nav {
     nav a:hover {
       color: #5f8696 !important; }
 
+.ng-cloac {
+  display: none; }
+
 .slug {
   background-image: url("../images/background.gif");
   background-size: cover;
@@ -101,5 +104,62 @@ nav {
 
 #createSession {
   margin-bottom: 30px; }
+
+#local-video {
+  height: 50vh;
+  max-width: 100%; }
+
+#remote-video {
+  height: 50vh;
+  max-width: 100%; }
+  #remote-video video {
+    margin: auto;
+    width: 100%;
+    height: 100%; }
+
+.video {
+  background-color: #164d65;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin: auto; }
+
+video {
+  /*width: 100%;*/ }
+
+.video-header {
+  text-align: center;
+  color: white; }
+
+.dojo {
+  background-color: #5f8696; }
+
+.dojo-header {
+  margin-top: 5px;
+  font-weight: light; }
+  .dojo-header .topic, .dojo-header .time {
+    font-size: 1.75em;
+    margin: 2px; }
+  .dojo-header .desc {
+    max-height: 100%;
+    max-width: 1000px;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .dojo-header h3 {
+    font-size: 1em;
+    font-style: italic; }
+  .dojo-header h4 {
+    font-size: 0.75em; }
+  .dojo-header .card-panel {
+    padding-top: 2px;
+    padding-bottom: 4px; }
+
+.dojo-banner {
+  color: #164d65;
+  font-weight: heavy;
+  text-align: center;
+  border-radius: 5px;
+  padding: 4px;
+  font-size: 2.5em; }
 
 /*# sourceMappingURL=styles.css.map */
