@@ -18,7 +18,6 @@ module.exports.checkout = function (req, res) {
   var nonce = req.body.payment_method_nonce;
   var price = req.body.price;
   var id = req.body.id;
-  console.log('%%%%%%%%%%%%%%%%%%%%', id, price, nonce)
   // Use payment method nonce here
   gateway.transaction.sale({
     amount: price,
@@ -30,7 +29,6 @@ module.exports.checkout = function (req, res) {
     if(err) {
       console.error(err);
     } else {
-      console.log('******',result.success);
       res.send({success: result.success});
     }
   });
