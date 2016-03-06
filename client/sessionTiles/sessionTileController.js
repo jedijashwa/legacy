@@ -23,7 +23,13 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
           $http({
             method: 'POST',
             url: '/sessions/send',
-            data: {price: $scope.session.price, id: $scope.session.id, payment_method_nonce: payload.nonce, free: $scope.session.free}
+            data: {price: $scope.session.price, id: $scope.session.id, payment_method_nonce: payload.nonce, free: $scope.session.free, studentId: $scope.getUserId()}
+          })
+          .then(function (res) {
+            console.log('****', res);
+          })
+          .catch(function (error) {
+            console.log('****', error);
           })
         }
       });
