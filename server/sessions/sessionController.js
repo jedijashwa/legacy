@@ -46,11 +46,11 @@ module.exports.getSession = function (req, res) {
   Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
       var userId = req.session.passport.user;
-      console.log(session);
       if (session.UserId !== userId && session.studentId !== userId) {
         res.sendStatus(401);
         return;
       } 
+      session.me_id = req.session.passport.user;
       res.json({session: session});
     } else {
       res.json({err: "Session not found"});

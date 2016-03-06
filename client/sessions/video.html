@@ -1,5 +1,25 @@
-<h1>{{session.topic}}</h1>
-<h2>{{session.category}} | {{session.description}}</h2>
-<h3>{{session.startTime | date : 'shortTime'}}</h3>
-<video id="local-video"></video>
-<div id="remote-video"></div>
+<div class="session-live">
+  <div class="container dojo-header">
+    <div class="card-panel">
+      <div class="dojo-banner">The Dojo</div>
+      <div class="info">
+        <span class="topic">Topic: {{session.topic}} | </span> <span class="time">Start Time: {{session.startTime | date : 'shortTime'}}</span>
+        <p class="desc">Description: {{session.description}}</p>
+      </div>
+    </div>
+    </div>
+  <div class="z-depth-3 dojo">
+    <div class="row">
+      <div class="col s12 m6">
+        <h3 class="video-header">{{session.me_id === session.UserId ? 'Student' : 'Sensei' }}</h3>
+        <div class="video z-depth-1" id="remote-video"></div>
+      </div>
+      <div class="col s12 m6">
+        <h3 class="video-header">{{session.me_id === session.UserId ? 'Sensei' : 'Student' }}</h3>
+        <div class="">
+          <video class="video z-depth-1" id="local-video"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
