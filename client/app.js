@@ -17,7 +17,7 @@ myApp.config(function ($routeProvider) {
     })
     .when('/create', {
       templateUrl: 'createSession/createSession.html',
-      controller: 'CreateSessionController'
+      controller: 'CreateSessionController',
     })
     .when('/sessions/:sessionId', {
       templateUrl: 'sessions/video.html',
@@ -25,9 +25,21 @@ myApp.config(function ($routeProvider) {
     })
     .when('/profile/', {
       templateUrl: 'profile/profile.html',
-      controller: 'ProfileController'
+      controller: 'ProfileController',
+      blocked: true
     })
     .otherwise({
       redirectTo: '/'
     });
-});
+})
+
+.run(['$rootScope', 'Auth', '$location', function ($rootScope, Auth, $location) {
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    if (!next.$$route.blocked) {
+      return;
+    }
+    if (!Auth.getLoggedIn()) {
+      $location.path('/');
+    }
+  }); 
+}]);
