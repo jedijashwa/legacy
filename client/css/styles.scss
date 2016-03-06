@@ -108,6 +108,14 @@ nav {
   }
 }
 
+.selected {
+  background-color: black;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
 .imageSearch {
   position: absolute;
   display: flex;

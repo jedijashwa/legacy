@@ -75,6 +75,11 @@ nav {
     position: relative;
     cursor: pointer; }
 
+.selected {
+  background-color: black; }
+  .selected:hover {
+    background-color: rgba(0, 0, 0, 0.5); }
+
 .imageSearch {
   position: absolute;
   display: flex;
