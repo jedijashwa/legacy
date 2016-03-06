@@ -38,7 +38,15 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
       belowOrigin: true, // Displays dropdown below the button
       alignment: 'left' // Displays dropdown with edge aligned to the left of button
     });
-
+    
+    var cardImageSize = function () {
+      var cardWidth = $('.sessionTile').width();
+      console.log('cardWidth: ', cardWidth);
+      $('.card-image').css({height: cardWidth * 0.5});
+    };
+    setTimeout(cardImageSize, 1000);
+    $(window).resize(cardImageSize);
+    
     $('select').material_select();
 
   });
