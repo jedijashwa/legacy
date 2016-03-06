@@ -13,8 +13,7 @@ module.exports.getClientToken = function (req, res) {
   });
 };
 
-module.exports.checkout = function (req, res) {
-  console.log('here');
+module.exports.checkout = function (req, res, callback) {
   var nonce = req.body.payment_method_nonce;
   var price = req.body.price;
   var id = req.body.id;
@@ -26,10 +25,11 @@ module.exports.checkout = function (req, res) {
       submitForSettlement: true
     }
   }, function (err, result) {
+    console.log('******', result);
     if(err) {
       console.error(err);
     } else {
-      res.send({success: result.success});
+      callback(result.success);
     }
   });
 };
