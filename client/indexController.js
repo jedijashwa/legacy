@@ -41,7 +41,8 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
 
     var cardImageSize = function () {
       var cardWidth = $('.sessionTile').width();
-      $('.card-image').css({height: cardWidth * 0.5});
+      $('.card-image').css({height: cardWidth * 0.6});
+      setTimeout(cardImageSize, 100);
     };
 
     var videoCardSize = function () {
@@ -49,7 +50,7 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
       $('#remote-video').css({height: cardWidth * 0.75 - 4});
     };
 
-    setTimeout(cardImageSize, 1000);
+    cardImageSize();
     $(window).resize(cardImageSize);
     setTimeout(videoCardSize, 1000);
     $(window).resize(videoCardSize);
