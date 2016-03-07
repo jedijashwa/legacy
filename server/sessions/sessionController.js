@@ -73,7 +73,7 @@ module.exports.getSession = function (req, res) {
 };
 
 module.exports.getStudentSessions = function(req,res) {
-  Session.findAll({ where: {studentId: req.params.userId}})
+  Session.findAll({ where: {studentId: req.params.userId}, include: [{model: User, as: 'User'}]})
   .then(function(sessions) {
     if (sessions) {
       res.json({studentSessions: sessions});
@@ -86,7 +86,7 @@ module.exports.getStudentSessions = function(req,res) {
   });
 };
 module.exports.getTutorSessions = function(req,res) {
-  Session.findAll({ where: {userId: req.session.passport.user}})
+  Session.findAll({ where: {userId: req.session.passport.user}, include: [{model: User, as: 'User'}]})
   .then(function(sessions) {
     if (sessions) {
       res.json({tutorSessions: sessions});
