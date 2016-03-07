@@ -68,6 +68,21 @@ nav {
   display: block;
   background-color: rgba(256,256,256, 0.3);
   height: 76px;
+  padding: 5px;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  a {
+    color: $primary-color;
+    font-weight: 800;
+
+    &:hover {
+      color: $color-lighter;
+    }
+  }
 }
 
 .sessionTile {
