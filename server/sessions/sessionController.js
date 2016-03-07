@@ -114,7 +114,6 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
-  console.log("HERE: ", req.session);
   if(req.session.passport && req.session.passport.user) {
     next();
   } else {
@@ -126,24 +125,25 @@ module.exports.checkAuth = function(req, res, next) {
 module.exports.registerSession = function(req, res) {
   var registration = function (req, res) {
     var sentInfo = req.body;
-    console.log('&&&&&&',sentInfo);
     if (req.session.passport.user !== sentInfo.studentId) {
       res.send('Error', {error: 'Error processing your request'});
       return;
     }
 
-    Session.findById(sentInfo.id, {include: [User]}).then(function (session){
+    Session.findById(sentInfo.id, {include: [{model: User, as: 'User'}]}).then(function (session){
       if (!session) {
         res.send({error: 'session does not exist'})
+        return;
       }
-      if (session.status) {
+      if (session.studentId) {
         res.send({error: 'full'});
         return;
       }
       session.status = true;
       session.studentId = sentInfo.studentId;
-      session.save().then(function (){
-
+      session.save()
+      .then(function (){
+        console.log('args',arguments);
         var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
 
         var data = {
@@ -156,23 +156,19 @@ module.exports.registerSession = function(req, res) {
         mailgun.messages().send(data, function (err, body) {
           if (err) {
             res.send({ error: err });
-            console.log('baderror',err);
           } else {
-            res.send({session: session});
+            res.json({session: session});
           }
         });
-        }).catch(function(err){
-          console.log({error: err});
-        });
-
-
+      }).catch(function(err){
+      
       });
-    };
+    });
+  };
 
   var requiresPayment = !req.body.free;
   if (requiresPayment) {
     payment.checkout(req, res, function (success) {
-      console.log('(((((((((())))))))))', success);
       if (success) {
         registration(req, res);
       } else {
