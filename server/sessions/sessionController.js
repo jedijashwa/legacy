@@ -54,10 +54,13 @@ module.exports.getSession = function (req, res) {
         res.sendStatus(401);
         return;
       }
-      /*if (session.startTime > Date.now() || Date.now() - session.startTime > 3600000) {
-        res.send({err: 'time'});
+      var now = new Date();
+      if (session.startTime.getDate() !== now.getDate() || 
+            session.startTime.getMonth() !== now.getMonth() || 
+              session.startTime.getFullYear() !== now.getFullYear()) {
+        res.json({err: 'time'});
         return;
-      }*/
+      }
       session.me_id = req.session.passport.user;
       res.json({session: session});
     } else {
