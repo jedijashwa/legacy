@@ -168,10 +168,9 @@ module.exports.registerSession = function(req, res) {
 
         mailgun.messages().send(data, function (err, body) {
           if (err) {
-            res.json({ error: err });
-          } else {
-            res.json({session: session});
+            console.log(err);
           }
+          res.json({session: session});
         });
       }).catch(function(err){
       });
