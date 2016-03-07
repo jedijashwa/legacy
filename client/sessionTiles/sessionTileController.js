@@ -62,6 +62,5 @@ myApp.controller('sessionTileController', function ($scope, $http, Auth) {
     $('#payment-form' + $scope.session.id).empty();
   };
 
-  console.log('fuck',$scope.session);
 
 });
