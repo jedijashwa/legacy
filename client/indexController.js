@@ -50,7 +50,7 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
       $('#remote-video').css({height: cardWidth * 0.75 - 4});
     };
 
-    cardImageSize();
+    $(cardImageSize);
     $(window).resize(cardImageSize);
     setTimeout(videoCardSize, 1000);
     $(window).resize(videoCardSize);
