@@ -6,12 +6,15 @@ var LocalStrategy = require('./localAuth.js');
 var User = require('../../db/models').User;
 var morgan = require('morgan');
 var session = require('express-session');
+var sslRedirect = require('heroku-ssl-redirect');
+
 
 module.exports = function (app, express) {
 
   var userRouter = express.Router();
   var sessionRouter = express.Router();
 
+  app.use(sslRedirect());
   app.use(morgan('tiny'));
   app.use(bodyParser.urlencoded({ extend: true }));
   app.use(bodyParser.json());
