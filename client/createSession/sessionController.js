@@ -89,9 +89,11 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
 
   $scope.getImages = function (phrase) {
     $scope.searchResults = [];
+    $scope.searching = true;
     $http.post('/images', {phrase: phrase})
     .then(function (response) {
       $scope.searchResults = response.data;
+      $scope.searching = false;
     },
     function (error) {
       console.log(error);

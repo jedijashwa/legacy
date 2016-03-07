@@ -5,6 +5,19 @@
         <i class="material-icons right">close</i>
       </div>
       <div class="row carousel">
+        <div class="center-box" ng-if="searching">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="carousel-item" ng-repeat="result in searchResults" data-img="{{ result }}"><img ng-src="{{ result }}" onload="$('.carousel').carousel();"></div>
       </div>
       <div class="row">
