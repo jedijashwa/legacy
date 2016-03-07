@@ -12,7 +12,7 @@ module.exports.addSession = function(req, res){
   // set the link property on req.body before passing it into Session.create
     var urlBase = 'http://localhost:3000/';
     if (process.env.NODE_ENV === 'production') {
-      urlBase = 'http://tutordojo.herokuapp.com/';
+      urlBase = 'https://tutordojo.herokuapp.com/';
     }
     var sessionInfo = req.body;
     sessionInfo.UserId = req.user.id;
