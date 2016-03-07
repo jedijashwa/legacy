@@ -243,4 +243,24 @@ video {
   padding: 5px 0;
 }
 
+// adds proper formatting for input colors
 
+input[type=search]:focus, input[type=text]:focus, input[type=password]:focus , input[type=type]:focus {
+  border-bottom-color: $primary-color !important;
+  box-shadow: 0 1px 0 0 $primary-color !important;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: $primary-color;
+
+  &:hover {
+    color: $color-lighter;
+  }
+}
+
+select {
+  border: 1px solid #464646 !important;
+  &:focus {
+    border: 1px solid $color-lighter !important;
+  }
+}
