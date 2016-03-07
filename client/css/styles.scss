@@ -155,23 +155,20 @@ nav {
 
 
 #local-video {
-  height: 50vh;
   max-width: 100%;
 }
 
 #remote-video {
-  height: 50vh;
   max-width: 100%;
   video {
     margin: auto;
     width: 100%;
-    height: 100%;
   }
 }
 
 .video {
-  background-color: $primary-color;
-  border-radius: 5px;
+  background-color: $color-lighter;
+  border-radius: 0px 0px 5px 5px;
   padding: 10px;
   width: 100%;
   margin: auto;
@@ -232,6 +229,14 @@ video {
   border-radius: 5px;
   padding: 4px;
   font-size: 2.5em;
+}
+
+.round-top {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.round-bottom {
+  border-radius: 0px 0px 5px 5px;
 }
 
 .sessions-header {
