@@ -3,11 +3,12 @@ myApp.controller('ProfileController', ['$scope', 'Auth', 'Profile', function($sc
   $scope.userId = Auth.getUserId();
   $scope.userName = Auth.getUserName();
   $scope.sessionTileTemplate = "/session_tile.html";
+  $scope.onProfile = true;
 
   $scope.getStudentSessions = function(){
     Profile.getStudentSessions($scope.userId)
     .then(function(studentSessions) {
-      $scope.studentSessions = studentSessions.studentSessions;  
+      $scope.studentSessions = studentSessions.studentSessions;
     });
   };
   $scope.getTutorSessions = function(){
