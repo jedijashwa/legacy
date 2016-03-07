@@ -8,24 +8,24 @@ var payment = require('../payments/paymentsController.js');
 
 module.exports.addSession = function(req, res){
 
-  // contact appear.in to get a random video chatroom link
-  // session record in db will include a link to video chat
-  http.post('https://api.appear.in/random-room-name', function (err, response) {
-    if (err) {
-      console.error (err);
-      return;
+    
+  // set the link property on req.body before passing it into Session.create
+    var urlBase = 'http://localhost:3000/';
+    if (process.env.NODE_ENV === 'production') {
+      urlBase = 'http://tutordojo.herokuapp.com/';
     }
     var sessionInfo = req.body;
     sessionInfo.UserId = req.user.id;
-  // set the link property on req.body before passing it into Session.create
-    req.body.link = ("https://appear.in" + JSON.parse(response.buffer).roomName);
     Session.create(sessionInfo).then(function (session) {
-      res.send(session);
+      session.link = urlBase + '#/sessions/' + session.id;
+      session.save().then(function (session) {
+        res.send(session);
+      })
     })
     .catch(function (err) {
+      res.sendStatus(401);
       console.error('Error creating session: ', err);
     });
-  });
 };
 
 module.exports.getSessions = function (req, res){
@@ -120,6 +120,7 @@ module.exports.deleteSession = function (req, res){
 };
 
 module.exports.checkAuth = function(req, res, next) {
+  console.log(req.session.passport);
   if(req.session.passport && req.session.passport.user) {
     next();
   } else {
@@ -136,38 +137,42 @@ module.exports.registerSession = function(req, res) {
       return;
     }
 
-    Session.findById(sentInfo.id, {include: [{model: User, as: 'User'}]}).then(function (session){
+    Session.findById(sentInfo.id, {include: [{model: User, as: 'User'}]})
+    .then(function (session){
       if (!session) {
+      console.log('cheese');
         res.send({error: 'session does not exist'})
         return;
       }
       if (session.studentId) {
+
         res.send({error: 'full'});
         return;
       }
       session.status = true;
       session.studentId = sentInfo.studentId;
       session.save()
-      .then(function (){
-        console.log('args',arguments);
+      .then(function (session){
+        console.log(session);
         var mailgun = new Mailgun({ apiKey: config.mailGunAPIKey, domain: config.mailGunDomain });
 
         var data = {
           from: 'robot@tutordojo.herokuapp.com',
           to: [sentInfo.tuteeEmail, session.User.dataValues.email],
-          subject: 'Session Registration - ' + sentInfo.topic,
-          html: 'Hey, this is the confirmation email for your Learn It Now! session about ' + sentInfo.topic + '. This is your session link: ' + sentInfo.link + '. Thanks for signing up!'
+          subject: 'Session Registration - ' + session.topic,
+          html: 'Hey, this is the confirmation email for your TutorDojo session about ' + session.topic + '. This is your session link: ' + session.link + '. Thanks for signing up!'
         };
 
         mailgun.messages().send(data, function (err, body) {
           if (err) {
-            res.send({ error: err });
+            console.log(err);
+            res.json({ error: err });
           } else {
             res.json({session: session});
           }
         });
       }).catch(function(err){
-      
+        console.log('whoa',err);
       });
     });
   };
