@@ -35,8 +35,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "postinstall": "bower install",
-    "prod": "node server.js"
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
