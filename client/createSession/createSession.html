@@ -91,10 +91,10 @@
       <h3>Is the Class Free?</h3>
       <div class="row">
         <div class="col s2">
-          <a class="waves-effect waves-light btn" ng-click="session.free = true">Yes</a>
+          <a ng-class="session.free ? 'selected' : ''" class="btn" ng-click="session.free = true">Yes</a>
         </div>
         <div class="col s2">
-          <a class="waves-effect waves-light btn" ng-click="session.free = false">No</a>
+          <a ng-class="!session.free ? 'selected' : ''" class="btn" ng-click="session.free = false">No</a>
         </div>
       </div>
       <div ng-show="session.free === false">
