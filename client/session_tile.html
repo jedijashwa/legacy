@@ -12,7 +12,7 @@
       <span class="card-title grey-text text-darken-4">{{session.topic}}<i class="material-icons right">close</i></span>
       <p><i>with {{session.User.username}}</i></p>
       <p>{{session.description}}</p>
-      <p>{{displayTime(session.startTime)}}</span></p>
+      <p>{{session.startTime | date : 'MM/dd/yy, h:mm a' }}</span></p>
       <a href="#/signin" ng-hide='getLoggedIn() || session.studentId'>Sign in to register</a>
       <a href="" ng-show="getLoggedIn() && !session.studentId" ng-click="initiateReg()">Register</a>
     </div>
