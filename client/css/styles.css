@@ -47,7 +47,18 @@ nav {
 .filter {
   display: block;
   background-color: rgba(255, 255, 255, 0.3);
-  height: 76px; }
+  height: 76px;
+  padding: 5px; }
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  padding-left: 20px; }
+  .date-filter a {
+    color: #164d65;
+    font-weight: 800; }
+    .date-filter a:hover {
+      color: #5f8696; }
 
 .sessionTile {
   border-radius: 5px; }
