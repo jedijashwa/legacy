@@ -133,7 +133,7 @@ module.exports.registerSession = function(req, res) {
   var registration = function (req, res) {
     var sentInfo = req.body;
     if (req.session.passport.user !== sentInfo.studentId) {
-      res.send('Error', {error: 'Error processing your request'});
+      res.json({error: 'Error processing your request'});
       return;
     }
 
@@ -141,12 +141,12 @@ module.exports.registerSession = function(req, res) {
     .then(function (session){
       if (!session) {
       console.log('cheese');
-        res.send({error: 'session does not exist'})
+        res.json({error: 'session does not exist'})
         return;
       }
       if (session.studentId) {
 
-        res.send({error: 'full'});
+        res.json({error: 'full'});
         return;
       }
       session.status = true;
@@ -165,14 +165,12 @@ module.exports.registerSession = function(req, res) {
 
         mailgun.messages().send(data, function (err, body) {
           if (err) {
-            console.log(err);
             res.json({ error: err });
           } else {
             res.json({session: session});
           }
         });
       }).catch(function(err){
-        console.log('whoa',err);
       });
     });
   };
