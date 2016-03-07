@@ -175,4 +175,18 @@ video {
   background-color: #a4482c;
   padding: 5px 0; }
 
+input[type=search]:focus, input[type=text]:focus, input[type=password]:focus, input[type=type]:focus {
+  border-bottom-color: #164d65 !important;
+  box-shadow: 0 1px 0 0 #164d65 !important; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #164d65; }
+  .dropdown-content li > a:hover, .dropdown-content li > span:hover {
+    color: #5f8696; }
+
+select {
+  border: 1px solid #464646 !important; }
+  select:focus {
+    border: 1px solid #5f8696 !important; }
+
 /*# sourceMappingURL=styles.css.map */
