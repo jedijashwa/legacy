@@ -21,7 +21,8 @@ myApp.config(function ($routeProvider) {
     })
     .when('/sessions/:sessionId', {
       templateUrl: 'sessions/video.html',
-      controller: 'VideoController'
+      controller: 'VideoController',
+      video: true
     })
     .when('/profile/', {
       templateUrl: 'profile/profile.html',
@@ -35,6 +36,10 @@ myApp.config(function ($routeProvider) {
 
 .run(['$rootScope', 'Auth', '$location', function ($rootScope, Auth, $location) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
+    if (!next.$$route.video) {
+      $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
+    }
     if (!next.$$route.blocked) {
       return;
     }
