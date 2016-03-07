@@ -16,6 +16,8 @@
       <p><i>with {{session.User.username}}</i></p>
       <p>{{session.description}}</p>
       <p>{{session.startTime | date : 'MM/dd/yy, h:mm a' }} PST</span></p>
+      <p ng-show="!session.free">${{session.price}}</p>
+      <p ng-show="session.free">FREE</p>
       <a href="#/signin" ng-hide='getLoggedIn() || session.studentId'>Sign in to register</a>
       <a href="" ng-show="getLoggedIn() && !session.studentId" ng-click="initiateReg()">Register</a>
     </div>
