@@ -43,12 +43,19 @@ module.exports.getSessions = function (req, res){
   });
 };
 
+/** Retrieve session for a video conference **/
+/** Request is rejected if you are not the tutor or student,
+    or it is too early/late **/
 module.exports.getSession = function (req, res) {
   Session.findById(req.params.sessionId).then(function (session) {
     if (session) {
       var userId = req.session.passport.user;
       if (session.UserId !== userId && session.studentId !== userId) {
         res.sendStatus(401);
+        return;
+      }
+      if (session.startTime > Date.now() || Date.now() - session.startTime > 3600000) {
+        res.send({err: 'time'});
         return;
       }
       session.me_id = req.session.passport.user;
@@ -58,7 +65,6 @@ module.exports.getSession = function (req, res) {
     }
   })
   .catch(function(err) {
-    console.log("ERR: ", err);
     res.send(404, {err: err});
   });
 };

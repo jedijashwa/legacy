@@ -8,14 +8,17 @@ myApp.controller('VideoController', ['$rootScope', '$scope', '$routeParams', 'Vi
       .then(function(res){
         if (res.status === 401) {
           console.log('webrtc', $rootScope.webrtc);
-          $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
           $scope.setLoggedIn(false);
-          $location.path('/');
+          $scope.closeConf();
+          return;
+        }
+        if (res.data.err === 'time') {
+          $scope.closeConf();
+          Materialize.toast('You are either too early or too late, sorry!', 3000);
           return;
         }
         if (res.data.err === 'Session not found') {
-          $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
-          $location.path('/');
+          $scope.closeConf();
           return;
         }
         $rootScope.webrtc = $scope.setupConf('local-video', 'remote-video');
@@ -23,12 +26,16 @@ myApp.controller('VideoController', ['$rootScope', '$scope', '$routeParams', 'Vi
         $scope.session = res.data.session;
       })
       .catch(function (error) {
-        $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
-        $location.path('/');
+        $scope.closeConf();
       }); 
   };
   $scope.session = {
     id: $routeParams.sessionId
+  };
+
+  $scope.closeConf = function () {
+    $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
+    $location.path('/');
   };
   $scope.initialize();
 
