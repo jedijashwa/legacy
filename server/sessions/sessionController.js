@@ -55,12 +55,6 @@ module.exports.getSession = function (req, res) {
         return;
       }
       var now = new Date();
-      if (session.startTime.getDate() !== now.getDate() || 
-            session.startTime.getMonth() !== now.getMonth() || 
-              session.startTime.getFullYear() !== now.getFullYear()) {
-        res.json({err: 'time'});
-        return;
-      }
       session.me_id = req.session.passport.user;
       res.json({session: session});
     } else {
@@ -135,6 +129,7 @@ module.exports.checkAuth = function(req, res, next) {
 module.exports.registerSession = function(req, res) {
   var registration = function (req, res) {
     var sentInfo = req.body;
+
     if (req.session.passport.user !== sentInfo.studentId) {
       res.json({error: 'Error processing your request'});
       return;
