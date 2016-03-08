@@ -41,7 +41,7 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
 
     var cardImageSize = function () {
       var cardWidth = $('.sessionTile').width();
-      $('.card-image').css({height: cardWidth * 0.6});
+      $('.card-image img').css({height: cardWidth * 0.6});
       setTimeout(cardImageSize, 100);
     };
 
