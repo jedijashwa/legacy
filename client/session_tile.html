@@ -1,5 +1,5 @@
 
-<div class="col s12 m6 l4" ng-if="!session.studentId || onProfile" ng-hide="session.UserId === getUserId()">
+<div class="col s12 m6 l4" ng-if="!session.studentId || onProfile" ng-hide="session.UserId === getUserId() && !onProfile">
   <div class="card sessionTile">
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" ng-if="session.img" ng-src="{{ session.img }}">
