@@ -71,7 +71,7 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
   };
 })
 
-.controller('CreateSessionController', function ($scope, Session, Auth, $window, $http) {
+.controller('CreateSessionController', function ($scope, Session, Auth, $window, $http, $location) {
   $scope.session = {};
   $scope.myDate = new Date();
   $scope.imageSearch = false;
@@ -119,7 +119,7 @@ myApp.controller('SessionController', function ($scope, Session, Auth) {
 
     Session.createSession(session).then(function(){
       // redirect
-      $window.location.href = '/#/';
+      $location.path('/');
     });
     // });
 
