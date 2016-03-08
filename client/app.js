@@ -37,7 +37,7 @@ myApp.config(function ($routeProvider) {
 .run(['$rootScope', 'Auth', '$location', function ($rootScope, Auth, $location) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
-    if (!next.$$route.video) {
+    if (next.$$route && !next.$$route.video) {
       $rootScope.webrtc && $rootScope.webrtc.stopLocalVideo();
     }
     if (!next.$$route.blocked) {
@@ -46,5 +46,5 @@ myApp.config(function ($routeProvider) {
     if (!Auth.getLoggedIn()) {
       $location.path('/');
     }
-  }); 
+  });
 }]);
