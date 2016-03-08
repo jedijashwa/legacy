@@ -39,6 +39,11 @@ myApp.controller('IndexController', function($scope, $window, Auth) {
       alignment: 'left' // Displays dropdown with edge aligned to the left of button
     });
 
+    $("body").on('click', '.register-link', function() {
+      console.log('register link clicked');
+      $('body').animate({scrollTop: 0});
+    });
+
     var cardImageSize = function () {
       var cardWidth = $('.sessionTile').width();
       $('.card-image img').css({height: cardWidth * 0.6});

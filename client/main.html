@@ -65,5 +65,10 @@
       belowOrigin: true, // Displays dropdown below the button
       alignment: 'left' // Displays dropdown with edge aligned to the left of button
     });
+
+    $("body").on('click', '.register-link', function() {
+      console.log('register link clicked');
+      $(window).animate({scrollTop: 0});
+    });
   });
 </script>
