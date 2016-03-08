@@ -88,14 +88,13 @@
       </select>
       <br>
       <br>
-      <h3>Add cost?</h3>
       <div class="row">
         <div class="col s12">
           <div class="left cost-btn">
-            <a ng-class="!session.free ? 'selected' : ''" class="btn left" ng-click="session.free = false">yes</a>
+            <a ng-class="session.free ? 'selected' : ''" class="btn left" ng-click="session.free = true">free</a>
           </div>
           <div class="left cost-btn">
-            <a ng-class="session.free ? 'selected' : ''" class="btn left" ng-click="session.free = true">no</a>
+            <a ng-class="!session.free ? 'selected' : ''" class="btn left" ng-click="session.free = false">Paid</a>
           </div>
         </div>
       </div>
